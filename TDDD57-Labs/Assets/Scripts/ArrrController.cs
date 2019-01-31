@@ -73,6 +73,22 @@ public class ArrrController : MonoBehaviour
                 break;
             }
         }
+        Debug.Log("Found " + m_AllPlanes.Count + " planes.");
+
+        const float waterDepth = 0.25f;
+        const float planeScale = 0.1f;
+
+        // Make out water surface
+        foreach (var ogPlane in m_AllPlanes)
+        {
+            GameObject waterPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            waterPlane.transform.position = ogPlane.CenterPose.position;
+            waterPlane.transform.position += waterDepth * ogPlane.CenterPose.up;
+            waterPlane.transform.localScale = new Vector3(planeScale * ogPlane.ExtentX, planeScale, planeScale * ogPlane.ExtentZ);
+            waterPlane.transform.rotation = ogPlane.CenterPose.rotation;
+            GameObject waterUnderPlane = GameObject.Instantiate(waterPlane);
+            waterUnderPlane.transform.Rotate(180.0f, 0.0f, 0.0f);
+        }
 
         SearchingForPlaneUI.SetActive(showSearchingUI);
 
