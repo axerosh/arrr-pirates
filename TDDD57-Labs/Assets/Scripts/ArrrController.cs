@@ -34,6 +34,8 @@ public class ArrrController : MonoBehaviour
     /// </summary>
     public GameObject AndyPointPrefab;
 
+    public GameObject waterSurfacePrefab;
+
     /// <summary>
     /// A game object parenting UI for displaying the "searching for planes" snackbar.
     /// </summary>
@@ -96,13 +98,11 @@ public class ArrrController : MonoBehaviour
     /// </summary>
     private GameObject newWaterSurfaceFrom(DetectedPlane plane)
     {
-        const float planeScale = 0.1f;
-        GameObject waterSurface = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        GameObject waterSurface = GameObject.Instantiate(waterSurfacePrefab);
         waterSurface.transform.position = plane.CenterPose.position;
         waterSurface.transform.position += waterDepth* plane.CenterPose.up;
-        waterSurface.transform.localScale = new Vector3(planeScale* plane.ExtentX, planeScale, planeScale* plane.ExtentZ);
+        waterSurface.transform.localScale = new Vector3(plane.ExtentX, 1.0f, plane.ExtentZ);
         waterSurface.transform.rotation = plane.CenterPose.rotation;
-        waterSurface.GetComponent<Renderer>().sharedMaterial.color = Color.cyan;
         return waterSurface;
     }
 
