@@ -66,7 +66,6 @@ public class ArrrController : MonoBehaviour
         const float horizontalDiffCosLowerLimit = 0.6f;
         const float currentDiffCosLowerLimit = 0.8f;
         const float currentDiffPosYUpperLimit = 0.05f;
-        const float currentDiffPosXLUpperLimit = 0.2f;
 
         // Filter
         if (Vector3.Dot(plane.CenterPose.up, Vector3.up) <= horizontalDiffCosLowerLimit)
@@ -85,10 +84,6 @@ public class ArrrController : MonoBehaviour
             if (sqrDiffPosY > currentDiffPosYUpperLimit)
             {
                 return false; // Too different Y position from current
-            }
-            if (new Vector2(diffPos.x, diffPos.z).sqrMagnitude > currentDiffPosXLUpperLimit)
-            {
-                return false; // Too different XZ position from current
             }
         }
 
