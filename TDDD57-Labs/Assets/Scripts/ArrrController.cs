@@ -107,6 +107,7 @@ public class ArrrController : MonoBehaviour
         waterSurface.transform.position += waterDepth* plane.CenterPose.up;
         waterSurface.transform.localScale = new Vector3(planeScale* plane.ExtentX, planeScale, planeScale* plane.ExtentZ);
         waterSurface.transform.rotation = plane.CenterPose.rotation;
+        waterSurface.GetComponent<Renderer>().sharedMaterial.color = Color.cyan;
         return waterSurface;
     }
 
@@ -138,22 +139,10 @@ public class ArrrController : MonoBehaviour
             }
         }
 
-
-        // Make out water surface
-        foreach (var plane in m_AllPlanes)
+        // Set current water surface
+        if (waterSurface == null && m_AllPlanes.Count >= 1)
         {
-            GameObject surface = newWaterSurfaceFrom(plane);
-
-            // Set current water surface
-            if (waterSurface == null)
-            {
-                waterSurface = surface;
-                waterSurface.GetComponent<Renderer>().sharedMaterial.color = Color.green;
-            }
-            else
-            {
-                surface.GetComponent<Renderer>().sharedMaterial.color = Color.red;
-            }
+            waterSurface = newWaterSurfaceFrom(m_AllPlanes[0]);
         }
 
         SearchingForPlaneUI.SetActive(showSearchingUI);
