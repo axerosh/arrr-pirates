@@ -55,6 +55,61 @@ public class ArrrController : MonoBehaviour
     /// </summary>
     private bool m_IsQuitting = false;
 
+    private GameObject waterSurface = null;
+    private const float waterDepth = 0.25f;
+
+    /// <summary>
+    /// Returns false if the detected plane is filtered away and should be ignored.
+    /// </summary>
+    private bool PassesFilter(DetectedPlane plane)
+    {
+        const float horizontalDiffCosLowerLimit = 0.6f;
+        const float currentDiffCosLowerLimit = 0.8f;
+        const float currentDiffPosYUpperLimit = 0.05f;
+        const float currentDiffPosXLUpperLimit = 0.2f;
+
+        // Filter
+        if (Vector3.Dot(plane.CenterPose.up, Vector3.up) <= horizontalDiffCosLowerLimit)
+        {
+            return false; // Non-horizontal surface
+        }
+        if (waterSurface != null)
+        {
+            if (Vector3.Dot(waterSurface.transform.up, plane.CenterPose.up) <= currentDiffCosLowerLimit)
+            {
+                return false; // Too different orientation from current
+            }
+
+            Vector3 diffPos = waterSurface.transform.position - waterSurface.transform.up * waterDepth - plane.CenterPose.position;
+            float sqrDiffPosY = diffPos.y * diffPos.y;
+            if (sqrDiffPosY > currentDiffPosYUpperLimit)
+            {
+                return false; // Too different Y position from current
+            }
+            if (new Vector2(diffPos.x, diffPos.z).sqrMagnitude > currentDiffPosXLUpperLimit)
+            {
+                return false; // Too different XZ position from current
+            }
+        }
+
+        // Filter passed
+        return true;
+    }
+
+    /// <summary>
+    /// Returns a new water surface.
+    /// </summary>
+    private GameObject newWaterSurfaceFrom(DetectedPlane plane)
+    {
+        const float planeScale = 0.1f;
+        GameObject waterSurface = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        waterSurface.transform.position = plane.CenterPose.position;
+        waterSurface.transform.position += waterDepth* plane.CenterPose.up;
+        waterSurface.transform.localScale = new Vector3(planeScale* plane.ExtentX, planeScale, planeScale* plane.ExtentZ);
+        waterSurface.transform.rotation = plane.CenterPose.rotation;
+        return waterSurface;
+    }
+
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
@@ -73,26 +128,32 @@ public class ArrrController : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("Found " + m_AllPlanes.Count + " planes.");
 
-        const float waterDepth = 0.25f;
-        const float planeScale = 0.1f;
+        // Filter detected surfaces
+        for (int i = m_AllPlanes.Count - 1; i >= 0; i--)
+        {
+            if (!PassesFilter(m_AllPlanes[i]))
+            {
+                m_AllPlanes.RemoveAt(i);
+            }
+        }
+
 
         // Make out water surface
-        foreach (var ogPlane in m_AllPlanes)
+        foreach (var plane in m_AllPlanes)
         {
-            if (Vector3.Dot(ogPlane.CenterPose.up, Vector3.up) <= 0) // Non-horizontal surface
-            {
-                continue;
-            }
+            GameObject surface = newWaterSurfaceFrom(plane);
 
-            GameObject waterPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            waterPlane.transform.position = ogPlane.CenterPose.position;
-            waterPlane.transform.position += waterDepth * ogPlane.CenterPose.up;
-            waterPlane.transform.localScale = new Vector3(planeScale * ogPlane.ExtentX, planeScale, planeScale * ogPlane.ExtentZ);
-            waterPlane.transform.rotation = ogPlane.CenterPose.rotation;
-            GameObject waterUnderPlane = GameObject.Instantiate(waterPlane);
-            waterUnderPlane.transform.Rotate(180.0f, 0.0f, 0.0f);
+            // Set current water surface
+            if (waterSurface == null)
+            {
+                waterSurface = surface;
+                waterSurface.GetComponent<Renderer>().sharedMaterial.color = Color.green;
+            }
+            else
+            {
+                surface.GetComponent<Renderer>().sharedMaterial.color = Color.red;
+            }
         }
 
         SearchingForPlaneUI.SetActive(showSearchingUI);
