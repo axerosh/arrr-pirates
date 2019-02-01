@@ -81,6 +81,11 @@ public class ArrrController : MonoBehaviour
         // Make out water surface
         foreach (var ogPlane in m_AllPlanes)
         {
+            if (Vector3.Dot(ogPlane.CenterPose.up, Vector3.up) <= 0) // Non-horizontal surface
+            {
+                continue;
+            }
+
             GameObject waterPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             waterPlane.transform.position = ogPlane.CenterPose.position;
             waterPlane.transform.position += waterDepth * ogPlane.CenterPose.up;
