@@ -67,7 +67,8 @@ public class ArrrController : MonoBehaviour
     {
         const float horizontalDiffCosLowerLimit = 0.6f;
         const float currentDiffCosLowerLimit = 0.8f;
-        const float currentDiffPosYUpperLimit = 0.05f;
+        const float currentDiffPosXZUpperLimit = 0.2f;
+        const float currentDiffPosYUpperLimit = 0.1f;
 
         // Filter
         if (Vector3.Dot(plane.CenterPose.up, Vector3.up) <= horizontalDiffCosLowerLimit)
@@ -82,6 +83,12 @@ public class ArrrController : MonoBehaviour
             }
 
             Vector3 diffPos = waterSurface.transform.position - waterSurface.transform.up * waterDepth - plane.CenterPose.position;
+            float sqrDiffPosXZ = diffPos.x * diffPos.x  + diffPos.z + diffPos.z;
+            if (sqrDiffPosXZ > currentDiffPosXZUpperLimit)
+            {
+                return false; // Too different XZ position from current
+            }
+
             float sqrDiffPosY = diffPos.y * diffPos.y;
             if (sqrDiffPosY > currentDiffPosYUpperLimit)
             {
@@ -93,6 +100,24 @@ public class ArrrController : MonoBehaviour
         return true;
     }
 
+    private GameObject avarageWaterSurfaceFrom(List<DetectedPlane> planes)
+    {
+        Vector3 avgPos = Vector3.zero;
+        //Vector2 avgDim = Vector2.zero;
+        foreach (var plane in planes)
+        {
+            avgPos += plane.CenterPose.position;
+            //avgDim += new Vector2(plane.ExtentX, plane.ExtentZ);
+        }
+        avgPos /= planes.Count;
+        //avgDim /= planes.Count;
+
+        GameObject waterSurface = GameObject.Instantiate(waterSurfacePrefab);
+        waterSurface.transform.position = avgPos;// + waterDepth * Vector3.up;
+        //waterSurface.transform.localScale = new Vector3(avgDim.x, 1.0f, avgDim.y);
+        return waterSurface;
+    }
+
     /// <summary>
     /// Returns a new water surface.
     /// </summary>
@@ -102,7 +127,7 @@ public class ArrrController : MonoBehaviour
         waterSurface.transform.position = plane.CenterPose.position;
         waterSurface.transform.position += waterDepth* plane.CenterPose.up;
         waterSurface.transform.localScale = new Vector3(plane.ExtentX, 1.0f, plane.ExtentZ);
-        waterSurface.transform.rotation = plane.CenterPose.rotation;
+        //waterSurface.transform.rotation = plane.CenterPose.rotation;
         return waterSurface;
     }
 
@@ -135,9 +160,13 @@ public class ArrrController : MonoBehaviour
         }
 
         // Set current water surface
-        if (waterSurface == null && m_AllPlanes.Count >= 1)
+        if (m_AllPlanes.Count >= 1)
         {
-            waterSurface = newWaterSurfaceFrom(m_AllPlanes[0]);
+            if (waterSurface != null)
+            {
+                GameObject.Destroy(waterSurface);
+            }
+            waterSurface = avarageWaterSurfaceFrom(m_AllPlanes);
         }
 
         SearchingForPlaneUI.SetActive(showSearchingUI);
