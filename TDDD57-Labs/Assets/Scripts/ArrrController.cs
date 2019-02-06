@@ -35,6 +35,7 @@ public class ArrrController : MonoBehaviour
     public GameObject AndyPointPrefab;
 
     public GameObject waterSurfacePrefab;
+    public GameObject shipPrefab;
 
     /// <summary>
     /// A game object parenting UI for displaying the "searching for planes" snackbar.
@@ -58,6 +59,7 @@ public class ArrrController : MonoBehaviour
     private bool m_IsQuitting = false;
 
     private GameObject waterSurface = null;
+    private GameObject ship = null;
     private const float waterDepth = 0.25f;
 
     /// <summary>
@@ -100,7 +102,7 @@ public class ArrrController : MonoBehaviour
         return true;
     }
 
-    private GameObject avarageWaterSurfaceFrom(List<DetectedPlane> planes)
+    private void newAvarageWaterSurfaceFrom(List<DetectedPlane> planes)
     {
         Vector3 avgPos = Vector3.zero;
         //Vector2 avgDim = Vector2.zero;
@@ -112,10 +114,19 @@ public class ArrrController : MonoBehaviour
         avgPos /= planes.Count;
         //avgDim /= planes.Count;
 
-        GameObject waterSurface = GameObject.Instantiate(waterSurfacePrefab);
-        waterSurface.transform.position = avgPos;// + waterDepth * Vector3.up;
+
+        if (waterSurface == null)
+        {
+            waterSurface = GameObject.Instantiate(waterSurfacePrefab);
+        }
+        if (ship == null)
+        {
+            ship = GameObject.Instantiate(shipPrefab);
+            ship.transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
+        }
+        waterSurface.transform.position = avgPos;
+        ship.transform.position = avgPos + waterDepth * Vector3.up;
         //waterSurface.transform.localScale = new Vector3(avgDim.x, 1.0f, avgDim.y);
-        return waterSurface;
     }
 
     /// <summary>
@@ -162,11 +173,7 @@ public class ArrrController : MonoBehaviour
         // Set current water surface
         if (m_AllPlanes.Count >= 1)
         {
-            if (waterSurface != null)
-            {
-                GameObject.Destroy(waterSurface);
-            }
-            waterSurface = avarageWaterSurfaceFrom(m_AllPlanes);
+            newAvarageWaterSurfaceFrom(m_AllPlanes);
         }
 
         SearchingForPlaneUI.SetActive(showSearchingUI);
