@@ -60,7 +60,8 @@ public class ArrrController : MonoBehaviour
 
     private GameObject waterSurface = null;
     private GameObject ship = null;
-    private const float waterDepth = 0.25f;
+    private const float waterDepth = 25.0f;
+    private const float scale = 100.0f;
 
     /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
@@ -111,7 +112,7 @@ public class ArrrController : MonoBehaviour
             avgPos += plane.CenterPose.position;
             //avgDim += new Vector2(plane.ExtentX, plane.ExtentZ);
         }
-        avgPos /= planes.Count;
+        avgPos *= scale / planes.Count;
         //avgDim /= planes.Count;
 
 
@@ -122,24 +123,11 @@ public class ArrrController : MonoBehaviour
         if (ship == null)
         {
             ship = GameObject.Instantiate(shipPrefab);
-            ship.transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
+            ship.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
         waterSurface.transform.position = avgPos;
         ship.transform.position = avgPos + waterDepth * Vector3.up;
         //waterSurface.transform.localScale = new Vector3(avgDim.x, 1.0f, avgDim.y);
-    }
-
-    /// <summary>
-    /// Returns a new water surface.
-    /// </summary>
-    private GameObject newWaterSurfaceFrom(DetectedPlane plane)
-    {
-        GameObject waterSurface = GameObject.Instantiate(waterSurfacePrefab);
-        waterSurface.transform.position = plane.CenterPose.position;
-        waterSurface.transform.position += waterDepth* plane.CenterPose.up;
-        waterSurface.transform.localScale = new Vector3(plane.ExtentX, 1.0f, plane.ExtentZ);
-        //waterSurface.transform.rotation = plane.CenterPose.rotation;
-        return waterSurface;
     }
 
     /// <summary>
