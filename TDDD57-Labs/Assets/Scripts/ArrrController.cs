@@ -106,28 +106,21 @@ public class ArrrController : MonoBehaviour
     private void newAvarageWaterSurfaceFrom(List<DetectedPlane> planes)
     {
         Vector3 avgPos = Vector3.zero;
-        //Vector2 avgDim = Vector2.zero;
         foreach (var plane in planes)
         {
             avgPos += plane.CenterPose.position;
-            //avgDim += new Vector2(plane.ExtentX, plane.ExtentZ);
         }
         avgPos *= scale / planes.Count;
-        //avgDim /= planes.Count;
 
 
         if (waterSurface == null)
         {
-            waterSurface = GameObject.Instantiate(waterSurfacePrefab);
+            waterSurface = GameObject.Instantiate(waterSurfacePrefab, avgPos, new Quaternion());
         }
         if (ship == null)
         {
-            ship = GameObject.Instantiate(shipPrefab);
-            ship.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            ship = GameObject.Instantiate(shipPrefab, avgPos + waterDepth * Vector3.up, new Quaternion());
         }
-        waterSurface.transform.position = avgPos;
-        ship.transform.position = avgPos + waterDepth * Vector3.up;
-        //waterSurface.transform.localScale = new Vector3(avgDim.x, 1.0f, avgDim.y);
     }
 
     /// <summary>
