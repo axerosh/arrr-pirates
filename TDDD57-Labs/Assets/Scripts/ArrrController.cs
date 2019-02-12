@@ -1,7 +1,6 @@
 ﻿
 using System.Collections.Generic;
 using GoogleARCore;
-using GoogleARCore.Examples.Common;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -25,14 +24,9 @@ public class ArrrController : MonoBehaviour
     public GameObject DetectedPlanePrefab;
 
     /// <summary>
-    /// A model to place when a raycast from a user touch hits a plane.
+    /// ARCore Device of the scene, controlls scaling of the camera.
     /// </summary>
-    public GameObject AndyPlanePrefab;
-
-    /// <summary>
-    /// A model to place when a raycast from a user touch hits a feature point.
-    /// </summary>
-    public GameObject AndyPointPrefab;
+    public GameObject ARCoreDevice;
 
     public GameObject waterSurfacePrefab;
     public GameObject shipPrefab;
@@ -60,8 +54,7 @@ public class ArrrController : MonoBehaviour
 
     private GameObject waterSurface = null;
     private GameObject ship = null;
-    private const float waterDepth = 25.0f;
-    private const float scale = 100.0f;
+    private const float waterDepth = 0.25f;
 
     /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
@@ -103,26 +96,6 @@ public class ArrrController : MonoBehaviour
         return true;
     }
 
-    private void newAvarageWaterSurfaceFrom(List<DetectedPlane> planes)
-    {
-        Vector3 avgPos = Vector3.zero;
-        foreach (var plane in planes)
-        {
-            avgPos += plane.CenterPose.position;
-        }
-        avgPos *= scale / planes.Count;
-
-
-        if (waterSurface == null)
-        {
-            waterSurface = GameObject.Instantiate(waterSurfacePrefab, avgPos, new Quaternion());
-        }
-        if (ship == null)
-        {
-            ship = GameObject.Instantiate(shipPrefab, avgPos + waterDepth * Vector3.up, new Quaternion());
-        }
-    }
-
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
@@ -131,7 +104,7 @@ public class ArrrController : MonoBehaviour
         _UpdateApplicationLifecycle();
 
         // Hide snackbar when currently tracking at least one plane.
-        Session.GetTrackables<DetectedPlane>(m_AllPlanes);
+        Session.GetTrackables(m_AllPlanes);
         bool showSearchingUI = true;
         for (int i = 0; i < m_AllPlanes.Count; i++)
         {
@@ -149,12 +122,6 @@ public class ArrrController : MonoBehaviour
             {
                 m_AllPlanes.RemoveAt(i);
             }
-        }
-
-        // Set current water surface
-        if (m_AllPlanes.Count >= 1)
-        {
-            newAvarageWaterSurfaceFrom(m_AllPlanes);
         }
 
         SearchingForPlaneUI.SetActive(showSearchingUI);
@@ -180,34 +147,24 @@ public class ArrrController : MonoBehaviour
                     hit.Pose.rotation * Vector3.up) < 0)
             {
                 Debug.Log("Hit at back of the current DetectedPlane");
-            }
-            else
-            {
-                // Choose the Andy model for the Trackable that got hit.
-                GameObject prefab;
-                if (hit.Trackable is FeaturePoint)
-                {
-                    prefab = AndyPointPrefab;
-                }
-                else
-                {
-                    prefab = AndyPlanePrefab;
-                }
-
-                // Instantiate Andy model at the hit pose.
-                var andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-
-                // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
-                andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
-
-                // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
-                // world evolves.
-                var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-
-                // Make Andy model a child of the anchor.
-                andyObject.transform.parent = anchor.transform;
+            } else {
+                _ShowAndroidToastMessage("Coordinates: " + hit.Pose.position.ToString());
+                Destroy(waterSurface);
+                Destroy(ship);
+                CreateBoard(hit);
             }
         }
+    }
+
+    /// <summary>
+    /// Creates the play area at the given hit and binds it to an anchor at the same locaion.
+    /// </summary>
+    /// <param name="hit"> A TrackableHit where the play area should be spawned. </param>
+    private void CreateBoard(TrackableHit hit) {
+        //Spawn water
+        waterSurface = Instantiate(waterSurfacePrefab, hit.Pose.position, new Quaternion());
+        //Spawn ship
+        ship = Instantiate(shipPrefab, hit.Pose.position + Vector3.up * waterDepth, new Quaternion());
     }
 
     /// <summary>
