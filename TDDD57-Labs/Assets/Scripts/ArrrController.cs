@@ -143,7 +143,7 @@ public class ArrrController : MonoBehaviour
             // Use hit pose and camera pose to check if hittest is from the
             // back of the plane, if it is, no need to create the anchor.
             if ((hit.Trackable is DetectedPlane) &&
-                Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
+                Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position * 100.0f,
                     hit.Pose.rotation * Vector3.up) < 0)
             {
                 Debug.Log("Hit at back of the current DetectedPlane");
@@ -160,15 +160,24 @@ public class ArrrController : MonoBehaviour
     /// </summary>
     /// <param name="hit"> A TrackableHit where the play area should be spawned. </param>
     private void CreateBoard(TrackableHit hit) {
+
         //Spawn water
-        waterSurface = Instantiate(waterSurfacePrefab, hit.Pose.position, new Quaternion());
+        waterSurface = Instantiate(waterSurfacePrefab);
         //Spawn ship
-        ship = Instantiate(shipPrefab, hit.Pose.position + Vector3.up * waterDepth, new Quaternion());
+        ship = Instantiate(shipPrefab);
 
         //Set anchor
+        /*
         var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-        waterSurface.transform.parent = anchor.transform;
-        ship.transform.parent = anchor.transform;
+        anchor.transform.localScale = new Vector3(100.0f, 100.0f, 100.0f);
+        anchor.transform.rotation = new Quaternion();
+        */
+        waterSurface.transform.parent = ARCoreDevice.transform;
+        ship.transform.parent = ARCoreDevice.transform;
+        waterSurface.transform.localPosition = hit.Pose.position;
+        waterSurface.transform.localRotation = new Quaternion();
+        ship.transform.localPosition = hit.Pose.position + Vector3.up * waterDepth;
+        ship.transform.localRotation = new Quaternion();
     }
 
     /// <summary>
