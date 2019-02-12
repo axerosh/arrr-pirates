@@ -149,8 +149,7 @@ public class ArrrController : MonoBehaviour
                 Debug.Log("Hit at back of the current DetectedPlane");
             } else {
                 _ShowAndroidToastMessage("Coordinates: " + hit.Pose.position.ToString());
-                Destroy(waterSurface);
-                Destroy(ship);
+                DestroyBoard();
                 CreateBoard(hit);
             }
         }
@@ -165,6 +164,20 @@ public class ArrrController : MonoBehaviour
         waterSurface = Instantiate(waterSurfacePrefab, hit.Pose.position, new Quaternion());
         //Spawn ship
         ship = Instantiate(shipPrefab, hit.Pose.position + Vector3.up * waterDepth, new Quaternion());
+
+        //Set anchor
+        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+        waterSurface.transform.parent = anchor.transform;
+        ship.transform.parent = anchor.transform;
+    }
+
+    /// <summary>
+    /// Destroys the play area.
+    /// </summary>
+    private void DestroyBoard()
+    {
+        Destroy(waterSurface);
+        Destroy(ship);
     }
 
     /// <summary>
