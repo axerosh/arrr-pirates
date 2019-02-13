@@ -96,6 +96,11 @@ public class ArrrController : MonoBehaviour
         return true;
     }
 
+    public void Start()
+    {
+        ARCoreDevice.GetComponent<ARCoreSession>().SessionConfig.CameraFocusMode = CameraFocusMode.Auto;
+    }
+
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
