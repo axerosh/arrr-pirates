@@ -101,6 +101,8 @@ public class ArrrController : MonoBehaviour
         ARCoreDevice.GetComponent<ARCoreSession>().SessionConfig.CameraFocusMode = CameraFocusMode.Auto;
     }
 
+    private GameObject selectedCharacter = null;
+
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
@@ -144,9 +146,35 @@ public class ArrrController : MonoBehaviour
         int layerMask = 1 << 10; // layer 10 (Clickable)
         if (Physics.Raycast(ray, out virtualHit, Mathf.Infinity, layerMask))
         {
-            GameObject clickable = virtualHit.collider.gameObject;
-            Color c = clickable.GetComponent<Renderer>().sharedMaterial.color;
-            clickable.GetComponent<Renderer>().sharedMaterial.color = new Color(c.g, c.b, c.r, c.a);
+            GameObject clicked = virtualHit.collider.gameObject;
+            Character character = clicked.GetComponent<Character>();
+            Target target = clicked.GetComponent<Target>();
+            if (character != null)
+            {
+                if (selectedCharacter != null)
+                {
+                    selectedCharacter.GetComponent<Character>().Deselect();
+                }
+
+                if (clicked == selectedCharacter)
+                {
+                    // Deselect
+                    selectedCharacter = null;
+                }
+                else
+                {
+                    // Select new
+                    character.Select();
+                    selectedCharacter = clicked;
+                }
+            }
+            else if (target != null)
+            {
+                if (selectedCharacter != null)
+                {
+                    selectedCharacter.GetComponent<Character>().SetTarget(target);
+                }
+            }
         }
         else
         {
@@ -169,8 +197,14 @@ public class ArrrController : MonoBehaviour
                 else
                 {
                     _ShowAndroidToastMessage("Coordinates: " + hit.Pose.position.ToString());
-                    DestroyBoard();
-                    CreateBoard(hit);
+                    if (waterSurface == null)
+                    {
+                        CreateBoard(hit);
+                    }
+                    else
+                    {
+                        ReplaceBoard(hit);
+                    }
                 }
             }
         }
@@ -187,12 +221,7 @@ public class ArrrController : MonoBehaviour
         //Spawn ship
         ship = Instantiate(shipPrefab);
 
-        //Set anchor
-        /*
-        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-        anchor.transform.localScale = new Vector3(100.0f, 100.0f, 100.0f);
-        anchor.transform.rotation = new Quaternion();
-        */
+        //Set locatiion
         waterSurface.transform.parent = ARCoreDevice.transform;
         ship.transform.parent = ARCoreDevice.transform;
         waterSurface.transform.localPosition = hit.Pose.position;
@@ -202,12 +231,14 @@ public class ArrrController : MonoBehaviour
     }
 
     /// <summary>
-    /// Destroys the play area.
+    /// Replaces the play area.
     /// </summary>
-    private void DestroyBoard()
+    private void ReplaceBoard(TrackableHit hit)
     {
-        Destroy(waterSurface);
-        Destroy(ship);
+        waterSurface.transform.localPosition = hit.Pose.position;
+        waterSurface.transform.localRotation = new Quaternion();
+        ship.transform.localPosition = hit.Pose.position + Vector3.up * waterDepth;
+        ship.transform.localRotation = new Quaternion();
     }
 
     /// <summary>

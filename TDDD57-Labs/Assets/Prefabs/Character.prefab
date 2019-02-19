@@ -111,6 +111,8 @@ MonoBehaviour:
   - {fileID: 0}
   characterAgentPrefab: {fileID: 3727111075902648394, guid: e1df14de7c41ca24d8d867984fdeb0f8,
     type: 3}
+  selectedMaterial: {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
+  deselectedMaterial: {fileID: 2100000, guid: 83388242b29b37f47834903b3f14269a, type: 2}
 --- !u!54 &4437586205865724227
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,12 +6,10 @@ using UnityEngine.AI;
 public class CharacterAgent : MonoBehaviour
 {
     NavMeshAgent navAgent;
-    public Vector3 initialDestination;
 
     void Start()
     {
         navAgent = gameObject.GetComponent<NavMeshAgent>();
-        SetDestination(initialDestination);
     }
 
     public void SetDestination(Vector3 localPosition)

@@ -9,17 +9,14 @@ public class Character : MonoBehaviour
     CharacterAgent charAgent;
     int targetIndex = 0;
 
+    public Material selectedMaterial;
+    public Material deselectedMaterial;
+
     void Start()
     {
         GameObject agent = Instantiate(characterAgentPrefab, transform.localPosition, transform.rotation);
         agent.transform.parent = GameObject.FindWithTag("ShipHitbox").transform;
         charAgent = agent.GetComponent<CharacterAgent>();
-
-        if (targets.Count > targetIndex)
-        {
-            Vector3 targetPosition = targets[targetIndex].transform.localPosition;
-            charAgent.initialDestination = targetPosition;
-        }
     }
 
     private void Update()
@@ -29,24 +26,24 @@ public class Character : MonoBehaviour
 
     public void OnTargetReached(Target target)
     {
-        if (targets.Count > targetIndex && target == targets[targetIndex])
-        {
-            ChangeTarget();
-        }
+        // TODO
     }
 
-    void ChangeTarget()
-    {
-        if (targets.Count > 0)
-        {
-            ++targetIndex;
-            if (targetIndex >= targets.Count)
-            {
-                targetIndex = 0;
-            }
+    private Color highlightOffset = new Color(0.0f, 0.5f, 0.5f);
 
-            Vector3 targetPosition = targets[targetIndex].transform.localPosition;
-            charAgent.SetDestination(targetPosition);
-        }
+    public void Select()
+    {
+        GetComponent<Renderer>().sharedMaterial = selectedMaterial;
+    }
+
+    public void Deselect()
+    {
+        GetComponent<Renderer>().sharedMaterial = deselectedMaterial;
+    }
+
+    public void SetTarget(Target target)
+    {
+        Vector3 targetPosition = target.transform.localPosition;
+        charAgent.SetDestination(targetPosition);
     }
 }
