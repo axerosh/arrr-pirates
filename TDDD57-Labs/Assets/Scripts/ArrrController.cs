@@ -138,24 +138,40 @@ public class ArrrController : MonoBehaviour
             return;
         }
 
-        // Raycast against the location the player touched to search for planes.
-        TrackableHit hit;
-        TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
-            TrackableHitFlags.FeaturePointWithSurfaceNormal;
-
-        if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
+        // Hit in virtual world?
+        RaycastHit virtualHit;
+        Ray ray = FirstPersonCamera.ScreenPointToRay(new Vector3(touch.position.x, touch.position.y));
+        int layerMask = 1 << 10; // layer 10 (Clickable)
+        if (Physics.Raycast(ray, out virtualHit, Mathf.Infinity, layerMask))
         {
-            // Use hit pose and camera pose to check if hittest is from the
-            // back of the plane, if it is, no need to create the anchor.
-            if ((hit.Trackable is DetectedPlane) &&
-                Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position * 100.0f,
-                    hit.Pose.rotation * Vector3.up) < 0)
+            GameObject clickable = virtualHit.collider.gameObject;
+            Color c = clickable.GetComponent<Renderer>().sharedMaterial.color;
+            clickable.GetComponent<Renderer>().sharedMaterial.color = new Color(c.g, c.b, c.r, c.a);
+        }
+        else
+        {
+            // Hit in physical world?
+            // Raycast against the location the player touched to search for planes.
+            TrackableHit hit;
+            TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
+                TrackableHitFlags.FeaturePointWithSurfaceNormal;
+
+            if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
             {
-                Debug.Log("Hit at back of the current DetectedPlane");
-            } else {
-                _ShowAndroidToastMessage("Coordinates: " + hit.Pose.position.ToString());
-                DestroyBoard();
-                CreateBoard(hit);
+                // Use hit pose and camera pose to check if hittest is from the
+                // back of the plane, if it is, no need to create the anchor.
+                if ((hit.Trackable is DetectedPlane) &&
+                    Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position * 100.0f,
+                        hit.Pose.rotation * Vector3.up) < 0)
+                {
+                    Debug.Log("Hit at back of the current DetectedPlane");
+                }
+                else
+                {
+                    _ShowAndroidToastMessage("Coordinates: " + hit.Pose.position.ToString());
+                    DestroyBoard();
+                    CreateBoard(hit);
+                }
             }
         }
     }
