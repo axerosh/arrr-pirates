@@ -18,6 +18,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#pragma warning disable 0649 // Never assigned
+
 namespace GoogleARCore
 {
     using System;

@@ -18,6 +18,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+#pragma warning disable 0618 // Obsolete
+
 namespace GoogleARCore.Examples.CloudAnchors
 {
     using UnityEngine;
