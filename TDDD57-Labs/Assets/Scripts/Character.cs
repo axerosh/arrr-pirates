@@ -6,7 +6,6 @@ public class Character : MonoBehaviour
 {
     public GameObject characterAgentPrefab;
     CharacterAgent charAgent;
-    int targetIndex = 0;
 
     public Material selectedMaterial;
     public Material deselectedMaterial;

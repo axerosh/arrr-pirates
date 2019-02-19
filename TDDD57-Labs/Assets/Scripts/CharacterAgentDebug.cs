@@ -8,7 +8,6 @@ public class CharacterAgentDebug : MonoBehaviour
     public List<Target> targets = new List<Target>();
     int targetIndex = -1;
     NavMeshAgent navAgent;
-    bool hasFoundPath = false;
     
     
     void Start()
