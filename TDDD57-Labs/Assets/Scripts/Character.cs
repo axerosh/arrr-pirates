@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public List<Target> targets = new List<Target>();
     public GameObject characterAgentPrefab;
     CharacterAgent charAgent;
     int targetIndex = 0;
