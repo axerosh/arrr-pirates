@@ -106,9 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4ce8a48190304caa01fab167ba59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 0}
-  - {fileID: 0}
   characterAgentPrefab: {fileID: 3727111075902648394, guid: e1df14de7c41ca24d8d867984fdeb0f8,
     type: 3}
   selectedMaterial: {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
@@ -127,5 +124,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
