@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GoogleARCore;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ using Input = GoogleARCore.InstantPreviewInput;
 #endif
 
 /// <summary>
-/// Controls the HelloAR example.
+/// Player controller script based on ARCore Controller scripts.
 /// </summary>
 public class ArrrController : MonoBehaviour
 {
@@ -55,6 +54,11 @@ public class ArrrController : MonoBehaviour
     private GameObject waterSurface = null;
     private GameObject ship = null;
     private const float waterDepth = 0.25f;
+
+    /// <summary>
+    /// Wheter the player object is currently inside the body of water or not.
+    /// </summary>
+    private bool isUndewater = false;
 
     /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
@@ -208,6 +212,22 @@ public class ArrrController : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Fires when the player collides with a trigger, such as the body of water.
+    /// </summary>
+    /// <param name="other">The Trigger object that was entered</param>
+    public void OnWaterEnter() {
+        _ShowAndroidToastMessage("Entered the water!");
+    }
+
+    /// <summary>
+    /// Fires when the player leaves a trigger, such as the body of water.
+    /// </summary>
+    /// <param name="other">The Trigger object that was left.</param>
+    public void OnWaterExit() {
+        _ShowAndroidToastMessage("Left the water!");
     }
 
     /// <summary>
