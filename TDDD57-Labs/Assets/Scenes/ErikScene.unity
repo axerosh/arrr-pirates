@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -363,11 +363,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97747992, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
       propertyPath: waterFogColor.g
-      value: 0.6392157
+      value: 0.18091013
       objectReference: {fileID: 0}
     - target: {fileID: 97747992, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
       propertyPath: waterFogColor.b
-      value: 1
+      value: 0.2830189
       objectReference: {fileID: 0}
     - target: {fileID: 97747992, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
       propertyPath: normalFogColor.r
@@ -387,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 97747992, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
       propertyPath: normalFogDensity
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}

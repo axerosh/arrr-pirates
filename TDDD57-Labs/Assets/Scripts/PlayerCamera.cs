@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour {
 
     public Color waterFogColor;
-    public Color normalFogColor;
 
     public float waterFogDensity;
     public float normalFogDensity;
@@ -31,8 +30,6 @@ public class PlayerCamera : MonoBehaviour {
         if(other.name == "WaterHitBox") {
             RenderSettings.fogColor = waterFogColor;
             RenderSettings.fogDensity = waterFogDensity;
-
-            //TODO: Make fog closer when underwater (so we can actually see the fog)
             ShowAndroidToastMessage("Splash");
         }
     }
@@ -44,7 +41,6 @@ public class PlayerCamera : MonoBehaviour {
     /// <param name="other"></param>
     public void OnTriggerExit(Collider other) {
         if(other.name == "WaterHitBox") {
-            RenderSettings.fogColor = normalFogColor;
             RenderSettings.fogDensity = normalFogDensity;
             ShowAndroidToastMessage("Plosh!");
         }
