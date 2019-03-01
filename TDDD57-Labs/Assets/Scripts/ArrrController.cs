@@ -56,11 +56,6 @@ public class ArrrController : MonoBehaviour
     private const float waterDepth = 0.25f;
 
     /// <summary>
-    /// Wheter the player object is currently inside the body of water or not.
-    /// </summary>
-    private bool isUndewater = false;
-
-    /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
     /// </summary>
     private bool PassesFilter(DetectedPlane plane)

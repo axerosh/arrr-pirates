@@ -9,6 +9,9 @@ public class Ship : MonoBehaviour
     void Update()
     {
         GameObject seaFloor = GameObject.FindWithTag("SeaFloor");
-        seaFloor.transform.position -= transform.forward * moveSpeed * Time.deltaTime;
+        if (seaFloor != null)
+        {
+            seaFloor.transform.position -= transform.forward * moveSpeed * Time.deltaTime;
+        }
     }
 }
