@@ -35,6 +35,11 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+# Unity3D user settings
+TDDD57-Labs/ProjectSettings/EditorBuildSettings.asset
+TDDD57-Labs/ProjectSettings/ProjectSettings.asset
+
+
 # Created by https://www.gitignore.io/api/android,androidstudio
 # Edit at https://www.gitignore.io/?templates=android,androidstudio
 
