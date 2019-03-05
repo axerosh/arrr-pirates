@@ -181,7 +181,7 @@ public class ArrrController : MonoBehaviour
                     }
                     else
                     {
-                        ReplaceBoard(hit);
+                        PlaceBoard(hit);
                     }
                 }
             }
@@ -222,27 +222,30 @@ public class ArrrController : MonoBehaviour
         //Spawn ship
         ship = Instantiate(shipPrefab);
 
-        //Set locatiion
-        waterSurface.transform.parent = ARCoreDevice.transform;
-        ship.transform.parent = ARCoreDevice.transform;
-        waterSurface.transform.localPosition = hit.Pose.position;
-        waterSurface.transform.localRotation = new Quaternion();
-        ship.transform.localPosition = hit.Pose.position + Vector3.up * waterDepth;
-        ship.transform.localRotation = new Quaternion();
+        PlaceBoard(hit);
 
         //Deactivate plane visualizer once we have placed the board.
         planeVisualizer.SetActive(false);
     }
 
     /// <summary>
-    /// Replaces the play area.
+    /// Places the play area at hit.
     /// </summary>
-    private void ReplaceBoard(TrackableHit hit)
+    private void PlaceBoard(TrackableHit hit)
     {
+        //Set location
+        waterSurface.transform.parent = ARCoreDevice.transform;
+        ship.transform.parent = ARCoreDevice.transform;
         waterSurface.transform.localPosition = hit.Pose.position;
-        waterSurface.transform.localRotation = new Quaternion();
         ship.transform.localPosition = hit.Pose.position + Vector3.up * waterDepth;
-        ship.transform.localRotation = new Quaternion();
+
+        //Set rotation
+        Vector3 fromCamera = ship.transform.position - FirstPersonCamera.transform.position;
+        Vector3 fromCameraXZ = new Vector3(fromCamera.x, 0.0f, fromCamera.z);
+        Quaternion rotation = new Quaternion();
+        rotation.SetFromToRotation(Vector3.left, fromCameraXZ);
+        waterSurface.transform.rotation = rotation;
+        ship.transform.rotation = rotation;
     }
 
     /// <summary>
