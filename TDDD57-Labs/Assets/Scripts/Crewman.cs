@@ -37,7 +37,7 @@ public class Crewman : MonoBehaviour
     private Transform climbPointEnd;
 
     private Transform swimTarget;
-    private Target walkTarget;
+    private Transform walkTarget;
 
     void Start()
     {
@@ -74,9 +74,17 @@ public class Crewman : MonoBehaviour
         return GameObject.FindWithTag("Ship").transform.InverseTransformPoint(point);
     }
 
+    bool firstTargetSet = false;
+
     private void Update()
     {
         SetPendingState();
+
+        if (!firstTargetSet)
+        {
+            firstTargetSet = true;
+            //SetTarget(GameObject.FindWithTag("Target1"));
+        }
     }
 
     /*
@@ -126,7 +134,7 @@ public class Crewman : MonoBehaviour
                     if (charAgent != null && walkTarget != null)
                     {
                         //SetTarget(walkTarget);
-                        charAgent.SetDestination(ToShipLocal(walkTarget.transform.position));
+                        charAgent.SetDestination(ToShipLocal(walkTarget.position));
                         Debug.Log("Walk to target");
                         ShowAndroidToastMessage("Walk to walktarget");
                     }
@@ -180,6 +188,10 @@ public class Crewman : MonoBehaviour
                         swimTarget = null;
                     }
                 }
+                else
+                {
+                    SetTarget(GameObject.FindWithTag("Dropoff"));
+                }
                 break;
 
             default:
@@ -187,9 +199,15 @@ public class Crewman : MonoBehaviour
         }
     }
 
-    public void OnTargetReached(Target target)
+    public void OnTreasureReached(Treasure treasure)
     {
-        // TODO
+        GameObject.Destroy(treasure.gameObject);
+        SetTarget(GameObject.FindWithTag("Dropoff"));
+    }
+
+    public void OnDropoffReached()
+    {
+        // TODO: Frop off target
     }
 
     public void ClimbLadder(Transform point1, Transform point2, Transform pointEnd, ClimbDirection dir)
@@ -214,10 +232,15 @@ public class Crewman : MonoBehaviour
         return state == State.CLIMBING_1 || state == State.CLIMBING_2 || state == State.CLIMBING_END;
     }
 
-    private void SetTarget(Target target)
+    private void SetTarget(GameObject target)
     {
+        if (target == null)
+        {
+            return;
+        }
+
         // Underwater target
-        if (target.GetComponent<SeaFloorTreasure>())
+        if (target.GetComponentInParent<Treasure>())
         {
             swimTarget = target.transform;
 
@@ -251,7 +274,7 @@ public class Crewman : MonoBehaviour
         // On-ship target
         else
         {
-            walkTarget = target;
+            walkTarget = target.transform;
 
             // Go there now
             if (state == State.WALKING)

@@ -113,20 +113,28 @@ public class ArrrController : MonoBehaviour
 
         // If the player has not touched the screen, we are done with this update.
         Touch touch;
+        Ray ray;
         if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
         {
-            return;
+            //if (!Input.GetMouseButtonDown(0))
+            //{
+                return;
+            //}
+            //ray = FirstPersonCamera.ScreenPointToRay(Input.mousePosition);
+        }
+        else
+        {
+            ray = FirstPersonCamera.ScreenPointToRay(new Vector3(touch.position.x, touch.position.y));
         }
 
         // Hit in virtual world?
-        Ray ray = FirstPersonCamera.ScreenPointToRay(new Vector3(touch.position.x, touch.position.y));
         int layerMask = 1 << 10; // layer 10 (Clickable)
         if (Physics.Raycast(ray, out RaycastHit virtualHit, Mathf.Infinity, layerMask))
         {
-            GameObject clicked = virtualHit.collider.gameObject;
+            GameObject clicked = virtualHit.collider.GetComponent<Clickable>().mainObject;
             Selectable newSelected = clicked.GetComponent<Selectable>();
-            Target target = clicked.GetComponent<Target>();
-            Renderer targetRenderer = clicked.GetComponent<Renderer>();
+            Treasure treasure = clicked.GetComponent<Treasure>();
+            Hideable treasureHideable = clicked.GetComponent<Hideable>();
             if (newSelected != null)
             {
                 if (selected != null)
@@ -146,11 +154,11 @@ public class ArrrController : MonoBehaviour
                     selected.Select();
                 }
             }
-            else if (target != null && targetRenderer != null && targetRenderer.enabled)
+            else if (treasure != null && treasureHideable != null && treasureHideable.IsVisible())
             {
                 if (selected != null)
                 {
-                    if (!selected.SetTarget(target))
+                    if (!selected.SetTarget(clicked))
                     {
                         selected.Deselect();
                         selected = null;

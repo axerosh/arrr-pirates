@@ -6,18 +6,19 @@ public class SeaFloorVisible : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        Renderer renderer = other.GetComponent<Renderer>();
-        if (renderer != null)
+        Hideable hideable = other.GetComponent<Hideable>();
+        if (hideable != null)
         {
-            renderer.enabled = true;
+            hideable.SetVisible(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Renderer renderer = other.GetComponent<Renderer>();
-        if (renderer != null) {
-            renderer.enabled = false;
+        Hideable hideable = other.GetComponent<Hideable>();
+        if (hideable != null)
+        {
+            hideable.SetVisible(false);
         }
     }
 }

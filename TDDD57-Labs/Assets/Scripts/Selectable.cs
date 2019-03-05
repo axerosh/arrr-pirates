@@ -9,7 +9,7 @@ public class Selectable : MonoBehaviour
 
     public System.Action onSelected = null;
     public System.Action onDeselected = null;
-    public System.Action<Target> onTargetSet = null;
+    public System.Action<GameObject> onTargetSet = null;
 
     public void Select()
     {
@@ -32,7 +32,7 @@ public class Selectable : MonoBehaviour
     /**
      * Return true if setting a target was supported, else returns false.
      */
-    public bool SetTarget(Target target)
+    public bool SetTarget(GameObject target)
     {
         if (onTargetSet != null)
         {

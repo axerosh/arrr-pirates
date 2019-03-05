@@ -9,8 +9,9 @@ TagManager:
   - Ship
   - DeckEntryPoint
   - WaterEntryPoint
-  - Target1
+  - Dropoff
   - Target2
+  - Target1
   layers:
   - Default
   - TransparentFX

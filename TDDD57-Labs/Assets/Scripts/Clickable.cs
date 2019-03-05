@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeaFloorTreasure : MonoBehaviour
+public class Clickable : MonoBehaviour
 {
-
+    public GameObject mainObject;
 }
