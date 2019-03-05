@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntryPoint : MonoBehaviour
 {
+    public EntryPoint exit;
     public System.Action<Collider> onEntryFunc;
 
     void OnTriggerEnter(Collider other)
