@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    float moveSpeed = 5.0f;
+    float moveSpeed = 4.0f;
 
     void Update()
     {

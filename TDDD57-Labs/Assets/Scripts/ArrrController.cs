@@ -133,6 +133,7 @@ public class ArrrController : MonoBehaviour
             GameObject clicked = virtualHit.collider.gameObject;
             Character character = clicked.GetComponent<Character>();
             Target target = clicked.GetComponent<Target>();
+            Renderer targetRenderer = clicked.GetComponent<Renderer>();
             if (character != null)
             {
                 if (selectedCharacter != null)
@@ -152,7 +153,7 @@ public class ArrrController : MonoBehaviour
                     selectedCharacter = clicked;
                 }
             }
-            else if (target != null)
+            else if (target != null && targetRenderer != null && targetRenderer.enabled)
             {
                 if (selectedCharacter != null)
                 {

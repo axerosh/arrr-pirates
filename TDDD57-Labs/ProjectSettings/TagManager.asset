@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ShipHitbox
   - SeaFloor
+  - Ship
+  - DeckEntryPoint
+  - WaterEntryPoint
   layers:
   - Default
   - TransparentFX
