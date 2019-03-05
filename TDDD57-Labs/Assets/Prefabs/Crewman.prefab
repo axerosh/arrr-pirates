@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4437586205865724230}
   - component: {fileID: 4437586205865724229}
   - component: {fileID: 4437586205865724228}
+  - component: {fileID: 4466412495615625880}
   - component: {fileID: 4437586205865724227}
   m_Layer: 10
-  m_Name: Character
+  m_Name: Crewman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,6 +109,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterAgentPrefab: {fileID: 3727111075902648394, guid: e1df14de7c41ca24d8d867984fdeb0f8,
     type: 3}
+--- !u!114 &4466412495615625880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437586205865724225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2533bbe2922024983eb15b50fbf446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   selectedMaterial: {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
   deselectedMaterial: {fileID: 2100000, guid: 83388242b29b37f47834903b3f14269a, type: 2}
 --- !u!54 &4437586205865724227

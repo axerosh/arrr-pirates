@@ -6,10 +6,10 @@ public class Target : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        Character chara = other.GetComponent<Character>();
-        if (chara != null)
+        Crewman crewman = other.GetComponent<Crewman>();
+        if (crewman != null)
         {
-            chara.OnTargetReached(this);
+            crewman.OnTargetReached(this);
         }
         CharacterAgentDebug charaDebug = other.GetComponent<CharacterAgentDebug>();
         if (charaDebug != null)

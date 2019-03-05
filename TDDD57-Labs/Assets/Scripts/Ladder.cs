@@ -18,24 +18,24 @@ public class Ladder : MonoBehaviour
     
     void OnEntryBoat(Collider chara)
     {
-        Character character = chara.gameObject.GetComponent<Character>();
-        if (character != null)
+        Crewman crewman = chara.gameObject.GetComponent<Crewman>();
+        if (crewman != null)
         {
-            if (!character.IsClimbing())
+            if (!crewman.IsClimbing())
             {
-                character.ClimbLadder(intermediateInside, intermediateOutside, entryPointWater.transform, Character.ClimbDirection.DOWN);
+                crewman.ClimbLadder(intermediateInside, intermediateOutside, entryPointWater.transform, Crewman.ClimbDirection.DOWN);
             }
         }
     }
 
     void OnEntryWater(Collider chara)
     {
-        Character character = chara.gameObject.GetComponent<Character>();
-        if (character != null)
+        Crewman crewman = chara.gameObject.GetComponent<Crewman>();
+        if (crewman != null)
         {
-            if (!character.IsClimbing())
+            if (!crewman.IsClimbing())
             {
-                character.ClimbLadder(intermediateOutside, intermediateInside, entryPointBoat.transform, Character.ClimbDirection.UP);
+                crewman.ClimbLadder(intermediateOutside, intermediateInside, entryPointBoat.transform, Crewman.ClimbDirection.UP);
             }
         }
     }

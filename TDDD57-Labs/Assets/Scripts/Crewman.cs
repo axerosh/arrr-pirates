@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Character : MonoBehaviour
+public class Crewman : MonoBehaviour
 {
     public GameObject characterAgentPrefab;
     CharacterAgent charAgent;
 
     Rigidbody body;
-
-    public Material selectedMaterial;
-    public Material deselectedMaterial;
 
     private enum State
     {
@@ -45,6 +42,8 @@ public class Character : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
+        Selectable selectable = GetComponent<Selectable>();
+        selectable.onTargetSet = SetTarget;
     }
 
     private Vector3 lastMoveDirection = Vector3.zero;
@@ -215,17 +214,7 @@ public class Character : MonoBehaviour
         return state == State.CLIMBING_1 || state == State.CLIMBING_2 || state == State.CLIMBING_END;
     }
 
-    public void Select()
-    {
-        GetComponent<Renderer>().sharedMaterial = selectedMaterial;
-    }
-
-    public void Deselect()
-    {
-        GetComponent<Renderer>().sharedMaterial = deselectedMaterial;
-    }
-
-    public void SetTarget(Target target)
+    private void SetTarget(Target target)
     {
         // Underwater target
         if (target.GetComponent<SeaFloorTreasure>())

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class SeaMover : MonoBehaviour
 {
     float moveSpeed = 4.0f;
 
