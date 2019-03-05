@@ -11,10 +11,5 @@ public class Target : MonoBehaviour
         {
             crewman.OnTargetReached(this);
         }
-        CharacterAgentDebug charaDebug = other.GetComponent<CharacterAgentDebug>();
-        if (charaDebug != null)
-        {
-            charaDebug.OnTargetReached(this);
-        }
     }
 }
