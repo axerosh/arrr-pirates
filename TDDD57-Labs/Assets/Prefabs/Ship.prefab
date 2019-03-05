@@ -375,8 +375,7 @@ GameObject:
   - component: {fileID: 3041878186750814385}
   - component: {fileID: 8681448845045324346}
   - component: {fileID: 7921178746769673270}
-  - component: {fileID: 3917581496683032678}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: EntryPointShip
   m_TagString: DeckEntryPoint
   m_Icon: {fileID: 0}
@@ -422,7 +421,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 911050796a0fce44b83b4bb2b5e1f0c4, type: 2}
+  - {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -467,18 +466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf23fcef4b788b341bab340501b14242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3917581496683032678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1387251547403083765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a83fce84500f8342877e10aab41be12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1409242262956850636
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,8 +479,7 @@ GameObject:
   - component: {fileID: 8222928387288049687}
   - component: {fileID: 4825764393757432971}
   - component: {fileID: 825158261961418403}
-  - component: {fileID: 4236423395690893991}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: EntryPointShip
   m_TagString: DeckEntryPoint
   m_Icon: {fileID: 0}
@@ -539,7 +525,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 911050796a0fce44b83b4bb2b5e1f0c4, type: 2}
+  - {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -582,18 +568,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf23fcef4b788b341bab340501b14242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4236423395690893991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409242262956850636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a83fce84500f8342877e10aab41be12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4130935584827722650
@@ -700,8 +674,7 @@ GameObject:
   - component: {fileID: 3843455414848347562}
   - component: {fileID: 1743926435286227567}
   - component: {fileID: 7629890582209575572}
-  - component: {fileID: 5105714473272294293}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: EntryPointWater
   m_TagString: WaterEntryPoint
   m_Icon: {fileID: 0}
@@ -747,7 +720,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 911050796a0fce44b83b4bb2b5e1f0c4, type: 2}
+  - {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -792,18 +765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf23fcef4b788b341bab340501b14242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5105714473272294293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4210226472072278370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a83fce84500f8342877e10aab41be12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4596044850337746179
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,8 +778,7 @@ GameObject:
   - component: {fileID: 1457352168593406613}
   - component: {fileID: 5970802239660672328}
   - component: {fileID: 623295265516939387}
-  - component: {fileID: 5206884380257995005}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: EntryPointWater
   m_TagString: WaterEntryPoint
   m_Icon: {fileID: 0}
@@ -864,7 +824,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 911050796a0fce44b83b4bb2b5e1f0c4, type: 2}
+  - {fileID: 2100000, guid: 955e0b9cb2fbbdb4aad49faeffec966d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -907,18 +867,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf23fcef4b788b341bab340501b14242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5206884380257995005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596044850337746179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a83fce84500f8342877e10aab41be12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6461135926153224449
