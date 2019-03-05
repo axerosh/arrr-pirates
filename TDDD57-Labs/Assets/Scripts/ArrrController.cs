@@ -19,11 +19,6 @@ public class ArrrController : MonoBehaviour
     public Camera FirstPersonCamera;
 
     /// <summary>
-    /// A prefab for tracking and visualizing detected planes.
-    /// </summary>
-    public GameObject DetectedPlanePrefab;
-
-    /// <summary>
     /// ARCore Device of the scene, controlls scaling of the camera.
     /// </summary>
     public GameObject ARCoreDevice;
@@ -48,6 +43,7 @@ public class ArrrController : MonoBehaviour
 
     public GameObject boardSizeIndicator;
     public GameObject boardPlacementUI;
+    public GameObject planeVisualizer;
 
     private Selectable selected = null;
 
@@ -163,11 +159,10 @@ public class ArrrController : MonoBehaviour
         {
             // Hit in physical world?
             // Raycast against the location the player touched to search for planes.
-            TrackableHit hit;
             TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                 TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
-            if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
+            if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out TrackableHit hit))
             {
                 // Use hit pose and camera pose to check if hittest is from the
                 // back of the plane, if it is, no need to create the anchor.
@@ -234,6 +229,9 @@ public class ArrrController : MonoBehaviour
         waterSurface.transform.localRotation = new Quaternion();
         ship.transform.localPosition = hit.Pose.position + Vector3.up * waterDepth;
         ship.transform.localRotation = new Quaternion();
+
+        //Deactivate plane visualizer once we have placed the board.
+        planeVisualizer.SetActive(false);
     }
 
     /// <summary>
