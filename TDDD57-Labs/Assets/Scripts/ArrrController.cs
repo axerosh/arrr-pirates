@@ -45,6 +45,9 @@ public class ArrrController : MonoBehaviour
     public GameObject boardPlacementUI;
     public GameObject planeVisualizer;
 
+    public GameObject gamePlayUI;
+    private bool repositionBoard = false;
+
     private Selectable selected = null;
 
     /// <summary>
@@ -179,8 +182,7 @@ public class ArrrController : MonoBehaviour
                     {
                         CreateBoard(hit);
                     }
-                    else
-                    {
+                    else if (repositionBoard) {
                         ReplaceBoard(hit);
                     }
                 }
@@ -192,8 +194,10 @@ public class ArrrController : MonoBehaviour
         //Deactivate the board placement hint UI if the board has already been placed.
         if (ship && UpdateTracking()) {
             boardPlacementUI.SetActive(false);
+            gamePlayUI.SetActive(true);
         } else if (!UpdateTracking()) {
             //Activate it immediately if have no tracked planes.
+            gamePlayUI.SetActive(false);
             boardPlacementUI.SetActive(true);
         }
     }
@@ -237,8 +241,7 @@ public class ArrrController : MonoBehaviour
     /// <summary>
     /// Replaces the play area.
     /// </summary>
-    private void ReplaceBoard(TrackableHit hit)
-    {
+    private void ReplaceBoard(TrackableHit hit) {
         waterSurface.transform.localPosition = hit.Pose.position;
         waterSurface.transform.localRotation = new Quaternion();
         ship.transform.localPosition = hit.Pose.position + Vector3.up * waterDepth;
@@ -314,5 +317,13 @@ public class ArrrController : MonoBehaviour
                 toastObject.Call("show");
             }));
         }
+    }
+
+    /// <summary>
+    /// Reactivates the planeVisualizer allowing the player to replace the board.
+    /// </summary>
+    public void ToggleRepositionBoard() {
+        repositionBoard = !repositionBoard;
+        planeVisualizer.SetActive(repositionBoard);
     }
 }
