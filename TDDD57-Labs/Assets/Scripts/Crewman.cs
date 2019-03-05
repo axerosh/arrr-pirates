@@ -229,10 +229,14 @@ public class Crewman : MonoBehaviour
                 var deckEntryPoints = GameObject.FindGameObjectsWithTag("DeckEntryPoint");
                 foreach (var entryPoint in deckEntryPoints)
                 {
-                    float distance = Vector3.Distance(entryPoint.transform.position, transform.position);
+                    EntryPoint exitPoint = entryPoint.GetComponent<EntryPoint>().exit;
+                    float distanceDeck = Vector3.Distance(entryPoint.transform.position, transform.position);
+                    float distanceWater = Vector3.Distance(exitPoint.transform.position, target.transform.position);
+                    float distance = distanceDeck + distanceWater;
                     if (distance < closestDistance)
                     {
                         closestEntryPoint = entryPoint.transform;
+                        closestDistance = distance;
                     }
                 }
                 if (closestEntryPoint != null && charAgent != null)
@@ -268,10 +272,14 @@ public class Crewman : MonoBehaviour
                 var waterEntryPoints = GameObject.FindGameObjectsWithTag("WaterEntryPoint");
                 foreach (var entryPoint in waterEntryPoints)
                 {
-                    float distance = Vector3.Distance(entryPoint.transform.position, transform.position);
+                    EntryPoint exitPoint = entryPoint.GetComponent<EntryPoint>().exit;
+                    float distanceWater = Vector3.Distance(entryPoint.transform.position, transform.position);
+                    float distanceDeck = Vector3.Distance(exitPoint.transform.position, target.transform.position);
+                    float distance = distanceWater + distanceDeck;
                     if (distance < closestDistance)
                     {
                         closestEntryPoint = entryPoint.transform;
+                        closestDistance = distance;
                     }
                 }
                 if (closestEntryPoint != null)
