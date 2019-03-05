@@ -101,13 +101,7 @@ public class ArrrController : MonoBehaviour
     public void Update() {
         _UpdateApplicationLifecycle();
 
-        bool tracking = UpdateTracking();
-
-        if (!tracking) {
-            boardPlacementUI.SetActive(true);
-        } else {
-            boardPlacementUI.SetActive(false);
-        }
+        UpdateUI();
 
         // Filter detected surfaces
         for (int i = m_AllPlanes.Count - 1; i >= 0; i--)
@@ -196,6 +190,16 @@ public class ArrrController : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void UpdateUI() {
+        //Deactivate the board placement hint UI if the board has already been placed.
+        if (ship && UpdateTracking()) {
+            boardPlacementUI.SetActive(false);
+        } else if (!UpdateTracking()) {
+            //Activate it immediately if have no tracked planes.
+            boardPlacementUI.SetActive(true);
         }
     }
 
