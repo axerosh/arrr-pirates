@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2546023664461494942}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 0}
-  DetectedPlanePrefab: {fileID: 1654175882956584, guid: 6a35c744e5010405c847fad90282d2be,
-    type: 3}
   ARCoreDevice: {fileID: 0}
   waterSurfacePrefab: {fileID: 5347952622885602329, guid: 5d6cf3826065c624d8844a216ed2bf8b,
     type: 3}
   shipPrefab: {fileID: 907308364996056299, guid: 31eaeec558af1bf48b7d484c8545d4d5,
     type: 3}
-  SearchingForPlaneUI: {fileID: 2546023666023129071}
+  boardSizeIndicator: {fileID: 5413530497658330586, guid: 23fdfbd6d43416f4a9222ee7cbd5dd86,
+    type: 3}
+  boardPlacementUI: {fileID: 0}
 --- !u!1 &2546023665329299648
 GameObject:
   m_ObjectHideFlags: 0
