@@ -49,7 +49,7 @@ public class ArrrController : MonoBehaviour
     public GameObject boardSizeIndicator;
     public GameObject boardPlacementUI;
 
-    private GameObject selectedCharacter = null;
+    private Selectable selected = null;
 
     /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
@@ -94,7 +94,7 @@ public class ArrrController : MonoBehaviour
     {
         ARCoreDevice.GetComponent<ARCoreSession>().SessionConfig.CameraFocusMode = CameraFocusMode.Auto;
     }
-
+    
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
@@ -125,33 +125,37 @@ public class ArrrController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit virtualHit, Mathf.Infinity, layerMask))
         {
             GameObject clicked = virtualHit.collider.gameObject;
-            Character character = clicked.GetComponent<Character>();
+            Selectable newSelected = clicked.GetComponent<Selectable>();
             Target target = clicked.GetComponent<Target>();
             Renderer targetRenderer = clicked.GetComponent<Renderer>();
-            if (character != null)
+            if (newSelected != null)
             {
-                if (selectedCharacter != null)
+                if (selected != null)
                 {
-                    selectedCharacter.GetComponent<Character>().Deselect();
+                    selected.Deselect();
                 }
 
-                if (clicked == selectedCharacter)
+                if (selected != null && clicked == selected.gameObject)
                 {
                     // Deselect
-                    selectedCharacter = null;
+                    selected = null;
                 }
                 else
                 {
                     // Select new
-                    character.Select();
-                    selectedCharacter = clicked;
+                    selected = newSelected;
+                    selected.Select();
                 }
             }
             else if (target != null && targetRenderer != null && targetRenderer.enabled)
             {
-                if (selectedCharacter != null)
+                if (selected != null)
                 {
-                    selectedCharacter.GetComponent<Character>().SetTarget(target);
+                    if (!selected.SetTarget(target))
+                    {
+                        selected.Deselect();
+                        selected = null;
+                    }
                 }
             }
         }
