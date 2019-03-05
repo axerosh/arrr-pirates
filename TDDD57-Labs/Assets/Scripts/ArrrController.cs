@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GoogleARCore;
 using UnityEngine;
+using UnityEngine.UI;
 
 #if UNITY_EDITOR
 // Set up touch input propagation while using Instant Preview in the editor.
@@ -31,16 +32,6 @@ public class ArrrController : MonoBehaviour
     public GameObject shipPrefab;
 
     /// <summary>
-    /// A game object parenting UI for displaying the "searching for planes" snackbar.
-    /// </summary>
-    public GameObject SearchingForPlaneUI;
-
-    /// <summary>
-    /// The rotation in degrees need to apply to model when the Andy model is placed.
-    /// </summary>
-    private const float k_ModelRotation = 180.0f;
-
-    /// <summary>
     /// A list to hold all planes ARCore is tracking in the current frame. This object is used across
     /// the application to avoid per-frame allocations.
     /// </summary>
@@ -54,6 +45,11 @@ public class ArrrController : MonoBehaviour
     private GameObject waterSurface = null;
     private GameObject ship = null;
     private const float waterDepth = 0.25f;
+
+    public GameObject boardSizeIndicator;
+    public GameObject boardPlacementUI;
+
+    private GameObject selectedCharacter = null;
 
     /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
@@ -90,7 +86,6 @@ public class ArrrController : MonoBehaviour
                 return false; // Too different Y position from current
             }
         }
-
         // Filter passed
         return true;
     }
@@ -100,25 +95,18 @@ public class ArrrController : MonoBehaviour
         ARCoreDevice.GetComponent<ARCoreSession>().SessionConfig.CameraFocusMode = CameraFocusMode.Auto;
     }
 
-    private GameObject selectedCharacter = null;
-
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
-    public void Update()
-    {
+    public void Update() {
         _UpdateApplicationLifecycle();
 
-        // Hide snackbar when currently tracking at least one plane.
-        Session.GetTrackables(m_AllPlanes);
-        bool showSearchingUI = true;
-        for (int i = 0; i < m_AllPlanes.Count; i++)
-        {
-            if (m_AllPlanes[i].TrackingState == TrackingState.Tracking)
-            {
-                showSearchingUI = false;
-                break;
-            }
+        bool tracking = UpdateTracking();
+
+        if (!tracking) {
+            boardPlacementUI.SetActive(true);
+        } else {
+            boardPlacementUI.SetActive(false);
         }
 
         // Filter detected surfaces
@@ -130,8 +118,6 @@ public class ArrrController : MonoBehaviour
             }
         }
 
-        SearchingForPlaneUI.SetActive(showSearchingUI);
-
         // If the player has not touched the screen, we are done with this update.
         Touch touch;
         if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
@@ -140,10 +126,9 @@ public class ArrrController : MonoBehaviour
         }
 
         // Hit in virtual world?
-        RaycastHit virtualHit;
         Ray ray = FirstPersonCamera.ScreenPointToRay(new Vector3(touch.position.x, touch.position.y));
         int layerMask = 1 << 10; // layer 10 (Clickable)
-        if (Physics.Raycast(ray, out virtualHit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(ray, out RaycastHit virtualHit, Mathf.Infinity, layerMask))
         {
             GameObject clicked = virtualHit.collider.gameObject;
             Character character = clicked.GetComponent<Character>();
@@ -210,19 +195,16 @@ public class ArrrController : MonoBehaviour
     }
 
     /// <summary>
-    /// Fires when the player collides with a trigger, such as the body of water.
+    /// Returns true if any planes are currently being tracked, else returns false.
     /// </summary>
-    /// <param name="other">The Trigger object that was entered</param>
-    public void OnWaterEnter() {
-        _ShowAndroidToastMessage("Entered the water!");
-    }
-
-    /// <summary>
-    /// Fires when the player leaves a trigger, such as the body of water.
-    /// </summary>
-    /// <param name="other">The Trigger object that was left.</param>
-    public void OnWaterExit() {
-        _ShowAndroidToastMessage("Left the water!");
+    private bool UpdateTracking() {
+        Session.GetTrackables(m_AllPlanes);
+        for (int i = 0; i < m_AllPlanes.Count; i++) {
+            if (m_AllPlanes[i].TrackingState == TrackingState.Tracking) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
