@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MotionController : MonoBehaviour
 {
-    float rotationSpeed = 25.0f;
+    float rotationSpeed = 15.0f;
 
     private void Start()
     {

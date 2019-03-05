@@ -37,6 +37,11 @@ public class Helmsman : MonoBehaviour
             {
                 steering.enabled = flag;
             }
+            WakeEmitter wakes = ship.GetComponentInChildren<WakeEmitter>();
+            if (wakes != null)
+            {
+                wakes.enabled = flag;
+            }
         }
     }
 }
