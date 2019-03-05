@@ -177,9 +177,6 @@ public class Character : MonoBehaviour
             case State.SWIMMING:
                 if (swimTarget != null)
                 {
-                    float distanceLeft = Vector3.Distance(swimTarget.position, transform.position);
-                    Debug.Log("Swimming " + distanceLeft + " left");
-                    ShowAndroidToastMessage("Swimming " + distanceLeft + " left");
                     if (MoveTo(swimTarget, swimSpeed)) {
                         swimTarget = null;
                     }
