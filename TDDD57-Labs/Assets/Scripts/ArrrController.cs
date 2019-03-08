@@ -46,8 +46,9 @@ public class ArrrController : MonoBehaviour
     public GameObject planeVisualizer;
 
     private int score;
+    public int winCondition;
 
-    public GameObject gamePlayUI;
+    public GamePlayUI gamePlayUI;
     private bool repositionBoard = false;
 
     private Selectable selected = null;
@@ -91,11 +92,14 @@ public class ArrrController : MonoBehaviour
         return true;
     }
 
-    public void Start()
-    {
+    void Start() {
         ARCoreDevice.GetComponent<ARCoreSession>().SessionConfig.CameraFocusMode = CameraFocusMode.Auto;
     }
-    
+
+    private void Awake() {
+        gamePlayUI.SetWindCondition(winCondition);
+    }
+
     /// <summary>
     /// The Unity Update() method.
     /// </summary>
@@ -205,10 +209,10 @@ public class ArrrController : MonoBehaviour
         //Deactivate the board placement hint UI if the board has already been placed.
         if (ship && UpdateTracking()) {
             boardPlacementUI.SetActive(false);
-            gamePlayUI.SetActive(true);
+            gamePlayUI.gameObject.SetActive(true);
         } else if (!UpdateTracking()) {
             //Activate it immediately if have no tracked planes.
-            gamePlayUI.SetActive(false);
+            gamePlayUI.gameObject.SetActive(false);
             boardPlacementUI.SetActive(true);
         }
     }
@@ -311,6 +315,7 @@ public class ArrrController : MonoBehaviour
     /// </summary>
     public void AddScore(int amount) {
         score += amount;
+        gamePlayUI.UpdateScoreText(score);
     }
 
     /// <summary>

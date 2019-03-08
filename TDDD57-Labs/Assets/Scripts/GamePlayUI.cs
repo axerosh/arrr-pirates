@@ -11,7 +11,20 @@ public class GamePlayUI : MonoBehaviour {
 
     public Text hintText;
 
+    public Text scoreText;
+    private int winCondition;
+
     private bool reposition = false;
+
+    public void SetWindCondition(int newWinCondition) {
+        Debug.Log("New win condition: " + newWinCondition);
+        winCondition = newWinCondition;
+        scoreText.text = "Score: 0 / " + winCondition;
+    }
+
+    public void UpdateScoreText(int newScore) {
+        scoreText.text = "Score: " + newScore + " / " + winCondition;
+    }
 
     public void ToggleRepositionButton() {
         reposition = !reposition;
