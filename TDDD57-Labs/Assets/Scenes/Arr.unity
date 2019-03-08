@@ -2255,18 +2255,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 584509059696004314}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1184884838 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1323663459250191666, guid: a36c8ce14e79b6f4ca57433f6476028a,
-    type: 3}
-  m_PrefabInstance: {fileID: 584509059696004314}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184884835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9553188d424d854488e547b0ea02b019, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1233457656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,43 +2845,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1184884835, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2546023664461494940}
-    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1184884838}
-    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ToggleRepositionButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4864201372656076580, guid: a36c8ce14e79b6f4ca57433f6476028a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
 --- !u!114 &2546023664461494940 stripped

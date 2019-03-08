@@ -45,6 +45,8 @@ public class ArrrController : MonoBehaviour
     public GameObject boardPlacementUI;
     public GameObject planeVisualizer;
 
+    private int score;
+
     public GameObject gamePlayUI;
     private bool repositionBoard = false;
 
@@ -288,6 +290,13 @@ public class ArrrController : MonoBehaviour
             m_IsQuitting = true;
             Invoke("_DoQuit", 0.5f);
         }
+    }
+
+    /// <summary>
+    /// Adds amount score to the player. Amount may be negative to decrease score.
+    /// </summary>
+    public void AddScore(int amount) {
+        score += amount;
     }
 
     /// <summary>
