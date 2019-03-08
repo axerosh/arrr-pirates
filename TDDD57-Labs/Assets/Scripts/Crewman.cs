@@ -121,6 +121,8 @@ public class Crewman : MonoBehaviour
             switch (pendingState)
             {
                 case State.WALKING:
+                    swimTarget = null;
+
                     // Snap to navmesh
                     NavMeshHit hit;
                     if (NavMesh.SamplePosition(transform.localPosition, out hit, 10.0f, NavMesh.AllAreas))
@@ -133,16 +135,25 @@ public class Crewman : MonoBehaviour
                         charAgent = agent.GetComponent<CharacterAgent>();
                     }
                     
-                    if (charAgent != null && walkTarget != null)
+                    if (charAgent != null)
                     {
-                        //SetTarget(walkTarget);
-                        charAgent.SetDestination(ToShipLocal(walkTarget.position));
-                        Debug.Log("Walk to target");
-                        ShowAndroidToastMessage("Walk to walktarget");
+                        if (walkTarget == null || !isCarryingTreasure)
+                        {
+                            // Roaming
+                            charAgent.SetRoaming();
+                        }
+                        else
+                        {
+                            // Walking to target
+                            charAgent.SetDestination(ToShipLocal(walkTarget.position));
+                            Debug.Log("Walk to target");
+                            ShowAndroidToastMessage("Walk to walktarget");
+                        }
                     }
                     break;
 
                 case State.SWIMMING:
+                    walkTarget = null;
                     transform.parent = GameObject.FindWithTag("SeaFloor").transform;
                     break;
 
@@ -213,30 +224,40 @@ public class Crewman : MonoBehaviour
 
     public void OnDropoffReached()
     {
-        // TODO: Frop off target
         if (isCarryingTreasure)
         {
             var player = GameObject.FindObjectOfType<ArrrController>();
             player.AddScore(1);
             isCarryingTreasure = false;
         }
+        charAgent.SetRoaming();
     }
 
     public void ClimbLadder(Transform point1, Transform point2, Transform pointEnd, ClimbDirection dir)
     {
+        if (dir == ClimbDirection.DOWN)
+        {
+            if (swimTarget == null)
+            {
+                // Accidental
+                return;
+            }
+            postClimbState = State.SWIMMING;
+        }
+        else if (dir == ClimbDirection.UP)
+        {
+            if (walkTarget == null)
+            {
+                // Accidental
+                return;
+            }
+            postClimbState = State.WALKING;
+        }
+
+        pendingState = State.CLIMBING_1;
         climbPoint1 = point1;
         climbPoint2 = point2;
         climbPointEnd = pointEnd;
-
-        pendingState = State.CLIMBING_1;
-        if (dir == ClimbDirection.UP)
-        {
-            postClimbState = State.WALKING;
-        }
-        else if (dir == ClimbDirection.DOWN)
-        {
-            postClimbState = State.SWIMMING;
-        }
     }
 
     public bool IsClimbing()
