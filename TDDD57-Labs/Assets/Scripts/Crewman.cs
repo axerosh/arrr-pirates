@@ -22,6 +22,8 @@ public class Crewman : MonoBehaviour
     private State state = State.NONE;
     private State pendingState = State.WALKING;
 
+    private bool isCarryingTreasure = false;
+
     private float climbSpeed = 3.5f;
     private float swimSpeed = 5.0f;
 
@@ -201,13 +203,23 @@ public class Crewman : MonoBehaviour
 
     public void OnTreasureReached(Treasure treasure)
     {
-        GameObject.Destroy(treasure.gameObject);
-        SetTarget(GameObject.FindWithTag("Dropoff"));
+        if (treasure != null)
+        {
+            GameObject.Destroy(treasure.gameObject);
+            isCarryingTreasure = true;
+            SetTarget(GameObject.FindWithTag("Dropoff"));
+        }
     }
 
     public void OnDropoffReached()
     {
         // TODO: Frop off target
+        if (isCarryingTreasure)
+        {
+            var player = GameObject.FindObjectOfType<ArrrController>();
+            player.AddScore(1);
+            isCarryingTreasure = false;
+        }
     }
 
     public void ClimbLadder(Transform point1, Transform point2, Transform pointEnd, ClimbDirection dir)
