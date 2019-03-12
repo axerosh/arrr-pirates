@@ -6,6 +6,8 @@ public class TreasureCompass : MonoBehaviour
 {
     public GameObject needle;
 
+    private float spinSpeed = 80.0f;
+
     // Update is called once per frame
     void Update()
     {
@@ -31,6 +33,11 @@ public class TreasureCompass : MonoBehaviour
             {
                 needle.transform.right = Vector3.Scale(toTreasure, new Vector3(1.0f, 0.0f, 1.0f));
             }
+        }
+        else
+        {
+            // Spin
+            needle.transform.right = Quaternion.AngleAxis(Time.deltaTime * spinSpeed, Vector3.up) * needle.transform.right;
         }
     }
 }
