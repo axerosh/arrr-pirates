@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Helmsman : MonoBehaviour
 {
+    public TextMeshPro hintText;
+
+    private bool helmsmanHintRead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,8 +17,23 @@ public class Helmsman : MonoBehaviour
         selectable.onDeselected = Deselect;
     }
 
+    private void Update() {
+        UpdateText();
+    }
+
+    void UpdateText() {
+        if (!helmsmanHintRead) {
+            hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+        }
+    }
+
     private void Select()
     {
+        if (!helmsmanHintRead) {
+            helmsmanHintRead = true;
+            hintText.gameObject.SetActive(false);
+            GameObject.FindWithTag("UI").GetComponentInChildren<GamePlayUI>().DisplayHelmsmanHint();
+        }
         SetControlEnabled(true);
     }
 

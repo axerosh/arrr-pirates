@@ -12,6 +12,7 @@ TagManager:
   - Dropoff
   - Target2
   - Target1
+  - UI
   layers:
   - Default
   - TransparentFX

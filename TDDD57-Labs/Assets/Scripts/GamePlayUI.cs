@@ -12,6 +12,12 @@ public class GamePlayUI : MonoBehaviour {
     public Text hintText;
 
     public Text scoreText;
+
+    public float hintTimer;
+    public readonly string REPOSITION_STRING = "Reposition the board by touching somewhere on a detected plane!";
+    public readonly string CREWMAN_HINT = "Touch a treasure chest to have your crewman go get it!";
+    public readonly string HELMSMAN_HINT = "While the helmsman is selected, the ship will move. Steer by tilting your phone!";
+
     private int winCondition;
 
     private bool reposition = false;
@@ -26,7 +32,21 @@ public class GamePlayUI : MonoBehaviour {
         scoreText.text = "Score: " + newScore + " / " + winCondition;
     }
 
+    public void DisplayCrewmanHint() {
+        hintText.text = CREWMAN_HINT;
+        hintText.gameObject.SetActive(true);
+        Invoke("HideHint", hintTimer);
+    }
+
+    public void DisplayHelmsmanHint() {
+        hintText.text = HELMSMAN_HINT;
+        hintText.gameObject.SetActive(true);
+        Invoke("HideHint", hintTimer);
+    }
+
     public void ToggleRepositionButton() {
+        hintText.text = REPOSITION_STRING;
+        CancelInvoke("HideHint"); //Make sure the hint isn't hidden by previous character selects.
         reposition = !reposition;
         hintText.gameObject.SetActive(reposition);
         if (reposition) {
@@ -34,5 +54,9 @@ public class GamePlayUI : MonoBehaviour {
         } else {
             repositionButtonImage.sprite = repositionIcon;
         }
+    }
+
+    private void HideHint() {
+        hintText.gameObject.SetActive(false);
     }
 }

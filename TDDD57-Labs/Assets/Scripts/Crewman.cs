@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Crewman : MonoBehaviour
 {
+    private static bool crewmanHintShown = false;
+    public TextMeshPro hintText;
+
     public GameObject characterAgentPrefab;
     CharacterAgent charAgent;
 
@@ -46,6 +50,7 @@ public class Crewman : MonoBehaviour
         body = GetComponent<Rigidbody>();
         Selectable selectable = GetComponent<Selectable>();
         selectable.onTargetSet = SetTarget;
+        selectable.onSelected = OnSelected;
     }
 
     private Vector3 lastMoveDirection = Vector3.zero;
@@ -80,12 +85,22 @@ public class Crewman : MonoBehaviour
 
     private void Update()
     {
+        if (!crewmanHintShown) {
+            UpdateText();
+        }
+
         SetPendingState();
 
         if (!firstTargetSet)
         {
             firstTargetSet = true;
             //SetTarget(GameObject.FindWithTag("Target1"));
+        }
+    }
+
+    void UpdateText() {
+        if (!crewmanHintShown) {
+            hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
         }
     }
 
@@ -363,6 +378,23 @@ public class Crewman : MonoBehaviour
                     ShowAndroidToastMessage("Swim to Ladder");
                 }
             }
+        }
+    }
+
+    public void DisableClickMe() {
+        crewmanHintShown = true;
+        hintText.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Called when this crewman is selected.
+    /// </summary>
+    void OnSelected() {
+        if (!crewmanHintShown) {
+            foreach(Crewman man in FindObjectsOfType<Crewman>()) {
+                man.DisableClickMe();
+            }
+            GameObject.FindWithTag("UI").GetComponentInChildren<GamePlayUI>().DisplayCrewmanHint();
         }
     }
 

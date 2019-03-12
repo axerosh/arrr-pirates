@@ -674,6 +674,7 @@ MonoBehaviour:
   cancelIcon: {fileID: 21300000, guid: 2a76d861f823ccc478af71414301402a, type: 3}
   hintText: {fileID: 8309540308008330795}
   scoreText: {fileID: 3390765988927985568}
+  hintTimer: 7
 --- !u!1 &1267981516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1501,7 @@ GameObject:
   - component: {fileID: 584509060531346188}
   m_Layer: 5
   m_Name: UI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
