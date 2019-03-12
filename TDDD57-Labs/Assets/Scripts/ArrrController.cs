@@ -199,6 +199,7 @@ public class ArrrController : MonoBehaviour
                     else if (repositionBoard)
                     {
                         PlaceBoard(hit);
+                        ToggleRepositionBoard();
                     }
                 }
             }
@@ -352,6 +353,7 @@ public class ArrrController : MonoBehaviour
     /// </summary>
     public void ToggleRepositionBoard() {
         repositionBoard = !repositionBoard;
+        gamePlayUI.ToggleRepositionButton();
         planeVisualizer.SetActive(repositionBoard);
     }
 }

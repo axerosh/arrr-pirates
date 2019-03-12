@@ -2497,9 +2497,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2546023664461494940}
+    - target: {fileID: 371770840, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a36c8ce14e79b6f4ca57433f6476028a, type: 3}
 --- !u!114 &2546023664461494940 stripped
