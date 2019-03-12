@@ -29,7 +29,6 @@ public class CharacterAgent : MonoBehaviour {
         if (isRoaming)
         {
             var navAgent = GetComponent<NavMeshAgent>();
-            Debug.Log("Position at " + transform.position + ", destination at " + navAgent.destination);
             if (Vector3.Distance(navAgent.destination, transform.position + toFeet) < 0.1f)
             {
                 SetRandomDestination();

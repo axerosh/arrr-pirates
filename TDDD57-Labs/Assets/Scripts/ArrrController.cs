@@ -53,6 +53,17 @@ public class ArrrController : MonoBehaviour
 
     private Selectable selected = null;
 
+    /**
+     * Returns progres towards a win.
+     *
+     * 0.0 -> No progress
+     * 1.0 -> Win!
+     */
+    public float WinProgress()
+    {
+        return ((float)score) / (float)winCondition;
+    }
+
     /// <summary>
     /// Returns false if the detected plane is filtered away and should be ignored.
     /// </summary>
