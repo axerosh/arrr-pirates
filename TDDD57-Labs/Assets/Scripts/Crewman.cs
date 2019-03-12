@@ -49,7 +49,7 @@ public class Crewman : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         Selectable selectable = GetComponent<Selectable>();
-        selectable.onTargetSet = SetTarget;
+        selectable.onTargetSet = SetTargetExternal;
         selectable.onSelected = OnSelected;
     }
 
@@ -296,6 +296,14 @@ public class Crewman : MonoBehaviour
     public bool IsClimbing()
     {
         return state == State.CLIMBING_1 || state == State.CLIMBING_2 || state == State.CLIMBING_END;
+    }
+
+    public void SetTargetExternal(GameObject target)
+    {
+        if (!isCarryingTreasure)
+        {
+            SetTarget(target);
+        }
     }
 
     private void SetTarget(GameObject target)
