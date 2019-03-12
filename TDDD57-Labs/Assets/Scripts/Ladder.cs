@@ -33,10 +33,15 @@ public class Ladder : MonoBehaviour
         Crewman crewman = chara.gameObject.GetComponent<Crewman>();
         if (crewman != null)
         {
-            if (!crewman.IsClimbing())
-            {
-                crewman.ClimbLadder(intermediateOutside, intermediateInside, entryPointBoat.transform, Crewman.ClimbDirection.UP);
-            }
+            ClimbUp(crewman);
+        }
+    }
+
+    public void ClimbUp(Crewman crewman)
+    {
+        if (!crewman.IsClimbing())
+        {
+            crewman.ClimbLadder(intermediateOutside, intermediateInside, entryPointBoat.transform, Crewman.ClimbDirection.UP);
         }
     }
 }

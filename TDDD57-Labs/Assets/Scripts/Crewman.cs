@@ -204,6 +204,24 @@ public class Crewman : MonoBehaviour
                 else
                 {
                     SetTarget(GameObject.FindWithTag("Dropoff"));
+
+                    var ladders = GameObject.FindObjectsOfType<Ladder>();
+                    Ladder closestLadder = null;
+                    float closestDistance = float.MaxValue;
+                    foreach (Ladder ladder in ladders)
+                    {
+                        float distance = Vector3.Distance(transform.position - new Vector3(0.0f, 1.0f, 0.0f), ladder.transform.position);
+                        if (distance < closestDistance)
+                        {
+                            closestLadder = ladder;
+                            closestDistance = distance;
+                        }
+                    }
+                    if (closestLadder != null && closestDistance <= 6.5f)
+                    {
+                        // Already at entry point
+                        closestLadder.ClimbUp(this);
+                    };
                 }
                 break;
 

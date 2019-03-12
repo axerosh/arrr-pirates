@@ -172,7 +172,7 @@ public class ArrrController : MonoBehaviour
                 }
             }
         }
-        else
+        else if (waterSurface == null || repositionBoard)
         {
             // Hit in physical world?
             // Raycast against the location the player touched to search for planes.
@@ -203,6 +203,12 @@ public class ArrrController : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            // Clicked elsewhere, deselect
+            selected.Deselect();
+            selected = null;
         }
     }
 
