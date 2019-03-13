@@ -13,6 +13,8 @@ public class GamePlayUI : MonoBehaviour {
 
     public Text scoreText;
 
+    public Text selectedText;
+
     public float hintTimer;
     public readonly string REPOSITION_STRING = "Reposition the board by touching somewhere on a detected plane!";
     public readonly string CREWMAN_HINT = "Touch a treasure chest to have your crewman go get it!";
@@ -22,7 +24,7 @@ public class GamePlayUI : MonoBehaviour {
 
     private bool reposition = false;
 
-    public void SetWindCondition(int newWinCondition) {
+    public void SetWinCondition(int newWinCondition) {
         Debug.Log("New win condition: " + newWinCondition);
         winCondition = newWinCondition;
         scoreText.text = "Score: 0 / " + winCondition;
@@ -53,6 +55,23 @@ public class GamePlayUI : MonoBehaviour {
             repositionButtonImage.sprite = cancelIcon;
         } else {
             repositionButtonImage.sprite = repositionIcon;
+        }
+    }
+
+    public void SetSelected(Selectable selected) {
+        if (selected) {
+            if (selected.GetComponent<Crewman>()) {
+                selectedText.color = Color.red;
+                selectedText.text = "Selected: Crewman";
+            } else if (selected.GetComponent<Helmsman>()){
+                selectedText.color = Color.green;
+                selectedText.text = "Selected: Helmsman";
+            } else {
+                //Display this if something not meant to be selectable is selected.
+                selectedText.text = "Unknown selected: " + selected.gameObject.name;
+            }
+        } else {
+            selectedText.text = "";
         }
     }
 
