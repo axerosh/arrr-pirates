@@ -92,8 +92,6 @@ public class Crewman : MonoBehaviour
         return GameObject.FindWithTag("Ship").transform.InverseTransformPoint(point);
     }
 
-    bool firstTargetSet = false;
-
     private void Update()
     {
         if (!crewmanHintShown) {

@@ -6,20 +6,11 @@ using UnityEngine;
 public class TreasureCompass : MonoBehaviour
 {
     public GameObject needle;
-    public TextMeshPro hintText;
 
     private float spinSpeed = 80.0f;
 
-    void UpdateText()
-    {
-        hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        UpdateText();
-
         // Find closest treasure
         var treasures = GameObject.FindObjectsOfType<Treasure>();
         Transform closestTreasure = null;
