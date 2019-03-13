@@ -108,7 +108,7 @@ public class ArrrController : MonoBehaviour
     }
 
     private void Awake() {
-        gamePlayUI.SetWindCondition(winCondition);
+        gamePlayUI.SetWinCondition(winCondition);
     }
 
     /// <summary>
@@ -131,41 +131,32 @@ public class ArrrController : MonoBehaviour
         // If the player has not touched the screen, we are done with this update.
         Touch touch;
         Ray ray;
-        if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
-        {
-            //if (!Input.GetMouseButtonDown(0))
-            //{
+        if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began) {
                 return;
-            //}
-            //ray = FirstPersonCamera.ScreenPointToRay(Input.mousePosition);
         }
-        else
-        {
+        else {
             ray = FirstPersonCamera.ScreenPointToRay(new Vector3(touch.position.x, touch.position.y));
         }
 
         // Hit in virtual world?
         int layerMask = 1 << 10; // layer 10 (Clickable)
-        if (Physics.Raycast(ray, out RaycastHit virtualHit, Mathf.Infinity, layerMask))
-        {
+        Selectable newSelected = null;
+        if (Physics.Raycast(ray, out RaycastHit virtualHit, Mathf.Infinity, layerMask)) {
             GameObject clicked = virtualHit.collider.GetComponent<Clickable>().mainObject;
-            Selectable newSelected = clicked.GetComponent<Selectable>();
+            newSelected = clicked.GetComponent<Selectable>();
             Treasure treasure = clicked.GetComponent<Treasure>();
             Hideable treasureHideable = clicked.GetComponent<Hideable>();
-            if (newSelected != null)
-            {
-                if (selected != null)
-                {
+            if (newSelected != null) {
+                if (selected != null) {
                     selected.Deselect();
                 }
 
-                if (selected != null && clicked == selected.gameObject)
-                {
+                if (selected != null && clicked == selected.gameObject) {
                     // Deselect
+                    selected.Deselect(); //for posterity.
                     selected = null;
                 }
-                else
-                {
+                else {
                     // Select new
                     selected = newSelected;
                     selected.Select();
@@ -175,8 +166,7 @@ public class ArrrController : MonoBehaviour
             {
                 if (selected != null)
                 {
-                    if (!selected.SetTarget(clicked))
-                    {
+                    if (!selected.SetTarget(clicked)) {
                         selected.Deselect();
                         selected = null;
                     }
@@ -220,6 +210,7 @@ public class ArrrController : MonoBehaviour
             selected.Deselect();
             selected = null;
         }
+        gamePlayUI.SetSelected(newSelected);
     }
 
     private void UpdateUI() {
