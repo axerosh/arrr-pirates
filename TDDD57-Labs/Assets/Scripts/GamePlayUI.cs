@@ -17,7 +17,7 @@ public class GamePlayUI : MonoBehaviour {
 
     public float hintTimer;
     public readonly string REPOSITION_STRING = "Reposition the board by touching somewhere on a detected plane!";
-    public readonly string CREWMAN_HINT = "Touch a treasure chest to have your crewman go get it!";
+    public readonly string CREWMAN_HINT = "Touch a treasure chest to have your diver collect it!";
     public readonly string HELMSMAN_HINT = "While the helmsman is selected, the ship will move. Steer by tilting your phone!";
 
     private int winCondition;
@@ -62,7 +62,7 @@ public class GamePlayUI : MonoBehaviour {
         if (selected) {
             if (selected.GetComponent<Crewman>()) {
                 selectedText.color = Color.red;
-                selectedText.text = "Selected: Crewman";
+                selectedText.text = "Selected: Diver";
             } else if (selected.GetComponent<Helmsman>()){
                 selectedText.color = Color.green;
                 selectedText.text = "Selected: Helmsman";
