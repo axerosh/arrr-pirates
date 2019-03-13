@@ -118,7 +118,6 @@ public class Crewman : MonoBehaviour
                     if (charAgent != null)
                     {
                         Debug.Log("Destroy agent");
-                        ShowAndroidToastMessage("Destroy agent");
                         Destroy(charAgent.gameObject);
                         charAgent = null;
                     }
@@ -162,7 +161,6 @@ public class Crewman : MonoBehaviour
                             // Walking to target
                             charAgent.SetDestination(ToShipLocal(walkTarget.position));
                             Debug.Log("Walk to target");
-                            ShowAndroidToastMessage("Walk to walktarget");
                         }
                     }
                     break;
@@ -344,7 +342,6 @@ public class Crewman : MonoBehaviour
                 {
                     charAgent.SetDestination(ToShipLocal(closestEntryPoint.position));
                     Debug.Log("Walk to ladder " + ToShipLocal(closestEntryPoint.position));
-                    ShowAndroidToastMessage("Walk to ladder");
                 }
             }
         }
@@ -361,7 +358,6 @@ public class Crewman : MonoBehaviour
                 {
                     Debug.Log("Walk to target " + ToShipLocal(target.transform.position));
                     charAgent.SetDestination(ToShipLocal(target.transform.position));
-                    ShowAndroidToastMessage("Walk to target");
                 }
             }
 
@@ -387,7 +383,6 @@ public class Crewman : MonoBehaviour
                 {
                     swimTarget = closestEntryPoint;
                     Debug.Log("Swim to Ladder");
-                    ShowAndroidToastMessage("Swim to Ladder");
                 }
             }
         }

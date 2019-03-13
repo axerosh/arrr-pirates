@@ -202,7 +202,6 @@ public class ArrrController : MonoBehaviour
                 }
                 else
                 {
-                    _ShowAndroidToastMessage("Coordinates: " + hit.Pose.position.ToString());
                     if (waterSurface == null)
                     {
                         CreateBoard(hit);
