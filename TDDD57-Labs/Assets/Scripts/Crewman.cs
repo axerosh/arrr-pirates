@@ -8,6 +8,7 @@ public class Crewman : MonoBehaviour
 {
     private static bool crewmanHintShown = false;
     public TextMeshPro hintText;
+    public GameObject carriedTreasure;
 
     public GameObject characterAgentPrefab;
     CharacterAgent charAgent;
@@ -26,7 +27,16 @@ public class Crewman : MonoBehaviour
     private State state = State.NONE;
     private State pendingState = State.WALKING;
 
-    private bool isCarryingTreasure = false;
+    private bool m_isCarryingTreasure = false;
+    private bool isCarryingTreasure
+    {
+        get {return m_isCarryingTreasure; }
+        set {
+            if (m_isCarryingTreasure == value) return;
+            m_isCarryingTreasure = value;
+            carriedTreasure.SetActive(value);
+        }
+     }
 
     private float climbSpeed = 3.5f;
     private float swimSpeed = 5.0f;
@@ -178,12 +188,19 @@ public class Crewman : MonoBehaviour
         }
     }
 
+    private void LookAt2D(Vector3 targetPosition)
+    {
+        Vector3 delta = targetPosition - transform.position;
+        transform.forward = new Vector3(delta.x, 0.0f, delta.z);
+    }
+
     private void FixedUpdate()
     {
         switch (state)
         {
             case State.WALKING:
                 transform.localPosition = charAgent.transform.localPosition;
+                transform.localRotation = charAgent.transform.localRotation;
                 break;
 
             case State.CLIMBING_1:
@@ -191,6 +208,7 @@ public class Crewman : MonoBehaviour
                 {
                     pendingState = State.CLIMBING_2;
                 }
+                LookAt2D(climbPoint2.position);
                 break;
 
             case State.CLIMBING_2:
@@ -198,6 +216,7 @@ public class Crewman : MonoBehaviour
                 {
                     pendingState = State.CLIMBING_END;
                 }
+                LookAt2D(climbPoint2.position);
                 break;
 
             case State.CLIMBING_END:
@@ -205,6 +224,7 @@ public class Crewman : MonoBehaviour
                 {
                     pendingState = postClimbState;
                 }
+                LookAt2D(climbPoint1.position);
                 break;
 
             case State.SWIMMING:
@@ -212,6 +232,10 @@ public class Crewman : MonoBehaviour
                 {
                     if (MoveTo(swimTarget, swimSpeed)) {
                         swimTarget = null;
+                    }
+                    else
+                    {
+                        LookAt2D(swimTarget.position);
                     }
                 }
                 else
