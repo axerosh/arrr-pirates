@@ -339,10 +339,10 @@ public class Crewman : MonoBehaviour
         if (target.GetComponentInParent<Treasure>())
         {
             if (swimTarget) {
-                swimTarget.GetComponent<Treasure>()?.ToggleSelected(false);
+                swimTarget.GetComponent<SelectorIndicatorController>()?.SetSelected(false);
             }
             swimTarget = target.transform;
-            swimTarget.GetComponent<Treasure>()?.ToggleSelected(true);
+            swimTarget.GetComponent<SelectorIndicatorController>()?.SetSelected(true);
 
             // Go to ladder
             if (state == State.WALKING)

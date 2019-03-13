@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 320138312523559121}
   - component: {fileID: 8856887455240018976}
   - component: {fileID: 1785624599717118392}
+  - component: {fileID: 5283877394502271942}
   m_Layer: 0
   m_Name: Treasure
   m_TagString: Untagged
@@ -168,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5ce4c6b09a0b14bac6e57205d5866c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionIndicator: {fileID: 108893100382388682}
 --- !u!114 &1785624599717118392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +187,19 @@ MonoBehaviour:
   - {fileID: 8101777312939174266}
   - {fileID: 6998990053252710382}
   - {fileID: 8414176125179031934}
+--- !u!114 &5283877394502271942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5770190954619851223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efc7ffc7daa1224a9b6554e28f2ccd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionIndicator: {fileID: 108893100382388682}
 --- !u!1 &7438579747356948051
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.92}
+  m_AnchoredPosition: {x: 0, y: 1.41}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8101777312939174266
@@ -334,7 +347,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
