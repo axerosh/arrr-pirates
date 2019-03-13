@@ -25,7 +25,6 @@ public class Crewman : MonoBehaviour
         SWIMMING
     }
     private State state = State.NONE;
-    private State pendingState = State.WALKING;
 
     private bool m_isCarryingTreasure = false;
     private bool isCarryingTreasure
@@ -61,6 +60,7 @@ public class Crewman : MonoBehaviour
         Selectable selectable = GetComponent<Selectable>();
         selectable.onTargetSet = SetTargetExternal;
         selectable.onSelected = OnSelected;
+        SetState(State.WALKING);
     }
 
     private Vector3 lastMoveDirection = Vector3.zero;
@@ -98,14 +98,6 @@ public class Crewman : MonoBehaviour
         if (!crewmanHintShown) {
             UpdateText();
         }
-
-        SetPendingState();
-
-        if (!firstTargetSet)
-        {
-            firstTargetSet = true;
-            //SetTarget(GameObject.FindWithTag("Target1"));
-        }
     }
 
     void UpdateText() {
@@ -117,9 +109,9 @@ public class Crewman : MonoBehaviour
     /*
      * Change state. This is done here outside FixedUpdate to avoid heavy load.
      */
-    private void SetPendingState()
+    private void SetState(State newState)
     {
-        if (pendingState != state)
+        if (newState != state)
         {
             // Previous state
             switch (state)
@@ -142,7 +134,7 @@ public class Crewman : MonoBehaviour
             }
 
             // New state
-            switch (pendingState)
+            switch (newState)
             {
                 case State.WALKING:
                     swimTarget = null;
@@ -184,7 +176,7 @@ public class Crewman : MonoBehaviour
                     break;
             }
 
-            state = pendingState;
+            state = newState;
         }
     }
 
@@ -206,7 +198,7 @@ public class Crewman : MonoBehaviour
             case State.CLIMBING_1:
                 if (MoveTo(climbPoint1, climbSpeed))
                 {
-                    pendingState = State.CLIMBING_2;
+                    SetState(State.CLIMBING_2);
                 }
                 LookAt2D(climbPoint2.position);
                 break;
@@ -214,7 +206,7 @@ public class Crewman : MonoBehaviour
             case State.CLIMBING_2:
                 if (MoveTo(climbPoint2, climbSpeed))
                 {
-                    pendingState = State.CLIMBING_END;
+                    SetState(State.CLIMBING_END);
                 }
                 LookAt2D(climbPoint2.position);
                 break;
@@ -222,7 +214,7 @@ public class Crewman : MonoBehaviour
             case State.CLIMBING_END:
                 if (MoveTo(climbPointEnd, climbSpeed))
                 {
-                    pendingState = postClimbState;
+                    SetState(postClimbState);
                 }
                 LookAt2D(climbPoint1.position);
                 break;
@@ -309,7 +301,7 @@ public class Crewman : MonoBehaviour
             postClimbState = State.WALKING;
         }
 
-        pendingState = State.CLIMBING_1;
+        SetState(State.CLIMBING_1);
         climbPoint1 = point1;
         climbPoint2 = point2;
         climbPointEnd = pointEnd;
