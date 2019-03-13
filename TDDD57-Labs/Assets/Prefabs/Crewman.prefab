@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4466412495615625880}
   - component: {fileID: 4400778164619604162}
   - component: {fileID: 4437586205865724227}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Crewman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,6 +486,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: ea6da4a0ebadb704691a6fa2d03f817b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: ea6da4a0ebadb704691a6fa2d03f817b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: ea6da4a0ebadb704691a6fa2d03f817b, type: 3}
       propertyPath: m_LocalPosition.x
