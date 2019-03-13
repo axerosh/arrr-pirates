@@ -30,7 +30,6 @@ public class PlayerCamera : MonoBehaviour {
         if(other.name == "WaterHitBox") {
             RenderSettings.fogColor = waterFogColor;
             RenderSettings.fogDensity = waterFogDensity;
-            ShowAndroidToastMessage("Splash");
         }
     }
 
@@ -42,7 +41,6 @@ public class PlayerCamera : MonoBehaviour {
     public void OnTriggerExit(Collider other) {
         if(other.name == "WaterHitBox") {
             RenderSettings.fogDensity = normalFogDensity;
-            ShowAndroidToastMessage("Plosh!");
         }
     }
 

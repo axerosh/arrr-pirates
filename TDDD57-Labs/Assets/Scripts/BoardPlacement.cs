@@ -41,8 +41,8 @@ public class BoardPlacement : MonoBehaviour {
             sweepTransform.gameObject.SetActive(true);
             boardPlacementHintText.text = SURFACE_DETECTION_HINT;
             //Rotate the sweep indicator image around the center of the UI.
-            sweepTransform.RotateAround(thisTransform.position, thisTransform.forward, sweepAngle);
-            sweepTransform.rotation = Quaternion.LookRotation(thisTransform.forward, thisTransform.up);
+            //sweepTransform.RotateAround(thisTransform.position, thisTransform.forward, sweepAngle);
+            //sweepTransform.rotation = Quaternion.LookRotation(thisTransform.forward, thisTransform.up);
         } else {
             sweepImage.gameObject.SetActive(false);
             //Show ship-placement hint when we have surfaces available.
