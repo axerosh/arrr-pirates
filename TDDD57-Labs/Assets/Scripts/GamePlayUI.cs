@@ -20,6 +20,8 @@ public class GamePlayUI : MonoBehaviour {
     public readonly string CREWMAN_HINT = "Touch a treasure chest to have your diver collect it!";
     public readonly string HELMSMAN_HINT = "While the helmsman is selected, the ship will move. Steer by tilting your phone!";
 
+    private readonly Color HELMSMAN_GREEN = new Color(0.0f, 0.6705883f, 0.0f);
+
     private int winCondition;
 
     private bool reposition = false;
@@ -64,7 +66,7 @@ public class GamePlayUI : MonoBehaviour {
                 selectedText.color = Color.red;
                 selectedText.text = "Selected: Diver";
             } else if (selected.GetComponent<Helmsman>()){
-                selectedText.color = Color.green;
+                selectedText.color = HELMSMAN_GREEN;
                 selectedText.text = "Selected: Helmsman";
             } else {
                 //Display this if something not meant to be selectable is selected.
