@@ -62,6 +62,6 @@ If their initial camera postition after placing the board was under water, which
 
 ## AR-Specific Details
 
-The clickable hitbox of the **Helmsman**, **Divers** and **Treasures** scale linearly by the distance to the camera, making it easier to lick them without moving the phone.
+The clickable hitbox of the **Helmsman**, **Divers** and **Treasures** scale linearly by the distance to the camera, making it easier to click them without moving the phone.
 
 The replace board feature allows the player to change location for more comfort and varied real-world height of operation, at their own discretion.
