@@ -24,7 +24,6 @@ public class Crewman : MonoBehaviour {
         SWIMMING
     }
     private State state = State.NONE;
-    private State pendingState = State.WALKING;
 
     private bool m_isCarryingTreasure = false;
     private bool isCarryingTreasure
@@ -39,6 +38,7 @@ public class Crewman : MonoBehaviour {
 
     private float climbSpeed = 3.5f;
     private float swimSpeed = 5.0f;
+    private const float ALREADY_AT_LADDER_DISTANCE = 2.5f;
 
     public enum ClimbDirection
     {
@@ -60,6 +60,7 @@ public class Crewman : MonoBehaviour {
         Selectable selectable = GetComponent<Selectable>();
         selectable.onTargetSet = SetTargetExternal;
         selectable.onSelected = OnSelected;
+        SetState(State.WALKING);
     }
 
     private Vector3 lastMoveDirection = Vector3.zero;
@@ -90,20 +91,10 @@ public class Crewman : MonoBehaviour {
         return GameObject.FindWithTag("Ship").transform.InverseTransformPoint(point);
     }
 
-    bool firstTargetSet = false;
-
     private void Update()
     {
         if (showCrewmanHint) {
             UpdateText();
-        }
-
-        SetPendingState();
-
-        if (!firstTargetSet)
-        {
-            firstTargetSet = true;
-            //SetTarget(GameObject.FindWithTag("Target1"));
         }
     }
 
@@ -114,9 +105,9 @@ public class Crewman : MonoBehaviour {
     /*
      * Change state. This is done here outside FixedUpdate to avoid heavy load.
      */
-    private void SetPendingState()
+    private void SetState(State newState)
     {
-        if (pendingState != state)
+        if (newState != state)
         {
             // Previous state
             switch (state)
@@ -139,7 +130,7 @@ public class Crewman : MonoBehaviour {
             }
 
             // New state
-            switch (pendingState)
+            switch (newState)
             {
                 case State.WALKING:
                     swimTarget = null;
@@ -181,7 +172,7 @@ public class Crewman : MonoBehaviour {
                     break;
             }
 
-            state = pendingState;
+            state = newState;
         }
     }
 
@@ -203,7 +194,7 @@ public class Crewman : MonoBehaviour {
             case State.CLIMBING_1:
                 if (MoveTo(climbPoint1, climbSpeed))
                 {
-                    pendingState = State.CLIMBING_2;
+                    SetState(State.CLIMBING_2);
                 }
                 LookAt2D(climbPoint2.position);
                 break;
@@ -211,7 +202,7 @@ public class Crewman : MonoBehaviour {
             case State.CLIMBING_2:
                 if (MoveTo(climbPoint2, climbSpeed))
                 {
-                    pendingState = State.CLIMBING_END;
+                    SetState(State.CLIMBING_END);
                 }
                 LookAt2D(climbPoint2.position);
                 break;
@@ -219,7 +210,7 @@ public class Crewman : MonoBehaviour {
             case State.CLIMBING_END:
                 if (MoveTo(climbPointEnd, climbSpeed))
                 {
-                    pendingState = postClimbState;
+                    SetState(postClimbState);
                 }
                 LookAt2D(climbPoint1.position);
                 break;
@@ -239,22 +230,23 @@ public class Crewman : MonoBehaviour {
                 {
                     SetTarget(GameObject.FindWithTag("Dropoff"));
 
-                    var ladders = GameObject.FindObjectsOfType<Ladder>();
-                    Ladder closestLadder = null;
+                    var entryPoints = GameObject.FindObjectsOfType<EntryPoint>();
+                    EntryPoint closestEntry = null;
                     float closestDistance = float.MaxValue;
-                    foreach (Ladder ladder in ladders)
+                    foreach (EntryPoint entry in entryPoints)
                     {
-                        float distance = Vector3.Distance(transform.position - new Vector3(0.0f, 1.0f, 0.0f), ladder.transform.position);
+                        float distance = Vector3.Distance(transform.position - new Vector3(0.0f, 1.0f, 0.0f), entry.transform.position);
                         if (distance < closestDistance)
                         {
-                            closestLadder = ladder;
+                            closestEntry = entry;
                             closestDistance = distance;
                         }
                     }
-                    if (closestLadder != null && closestDistance <= 6.5f)
+                    if (closestEntry != null && closestDistance <= ALREADY_AT_LADDER_DISTANCE)
                     {
                         // Already at entry point
-                        closestLadder.ClimbUp(this);
+                        closestEntry.GetComponentInParent<Ladder>().ClimbUp(this);
+                        Debug.Log("Immediately climb up ladder");
                     };
                 }
                 break;
@@ -306,7 +298,7 @@ public class Crewman : MonoBehaviour {
             postClimbState = State.WALKING;
         }
 
-        pendingState = State.CLIMBING_1;
+        SetState(State.CLIMBING_1);
         climbPoint1 = point1;
         climbPoint2 = point2;
         climbPointEnd = pointEnd;
@@ -336,11 +328,11 @@ public class Crewman : MonoBehaviour {
         if (target.GetComponentInParent<Treasure>()) {
             //Deselect any previously selected chest.
             if (swimTarget) {
-                swimTarget.GetComponent<Treasure>()?.ToggleSelected(false);
+                swimTarget.GetComponent<SelectorIndicatorController>()?.SetSelected(false);
             }
             //Set chest as new target.
             swimTarget = target.transform;
-            swimTarget.GetComponent<Treasure>()?.ToggleSelected(true);
+            swimTarget.GetComponent<SelectorIndicatorController>()?.SetSelected(true);
 
             //The first time a crewman is ordered to get a treasure, permanently disable the crewman hint.
             if (showCrewmanHint) {
@@ -367,10 +359,17 @@ public class Crewman : MonoBehaviour {
                         closestDistance = distance;
                     }
                 }
-                if (closestEntryPoint != null && charAgent != null)
-                {
-                    charAgent.SetDestination(ToShipLocal(closestEntryPoint.position));
-                    Debug.Log("Walk to ladder " + ToShipLocal(closestEntryPoint.position));
+                if (closestEntryPoint != null) {
+                    if (closestDistance < ALREADY_AT_LADDER_DISTANCE)
+                    {
+                        closestEntryPoint.GetComponentInParent<Ladder>().ClimbDown(this);
+                        Debug.Log("Immediately climb down ladder");
+                    }
+                    else if (charAgent != null)
+                    {
+                        charAgent.SetDestination(ToShipLocal(closestEntryPoint.position));
+                        Debug.Log("Walk to ladder " + ToShipLocal(closestEntryPoint.position));
+                    }
                 }
             }
         }

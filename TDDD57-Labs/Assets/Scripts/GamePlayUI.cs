@@ -21,7 +21,7 @@ public class GamePlayUI : MonoBehaviour {
     /// </summary>
     public float hintTimer;
     public readonly string REPOSITION_STRING = "Reposition the board by touching somewhere on a detected plane!";
-    public readonly string CREWMAN_HINT = "Touch a treasure chest to have your crewman go get it!";
+    public readonly string CREWMAN_HINT = "Touch a treasure chest to have your diver collect it!";
     public readonly string HELMSMAN_HINT = "While the helmsman is selected, the ship will move. Steer by tilting your phone!";
 
     public Color hintFlash;
@@ -29,6 +29,8 @@ public class GamePlayUI : MonoBehaviour {
     /// How long until hint messages return to white.
     /// </summary>
     public float hintFlashDecay;
+
+    private readonly Color HELMSMAN_GREEN = new Color(0.0f, 0.6705883f, 0.0f);
 
     private int winCondition;
 
@@ -87,9 +89,9 @@ public class GamePlayUI : MonoBehaviour {
         if (selected) {
             if (selected.GetComponent<Crewman>()) {
                 selectedText.color = Color.red;
-                selectedText.text = "Selected: Crewman";
+                selectedText.text = "Selected: Diver";
             } else if (selected.GetComponent<Helmsman>()){
-                selectedText.color = Color.green;
+                selectedText.color = HELMSMAN_GREEN;
                 selectedText.text = "Selected: Helmsman";
             } else {
                 //Display this if something not meant to be selectable is selected.

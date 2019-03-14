@@ -15,12 +15,14 @@ public class Selectable : MonoBehaviour
     {
         GetComponent<Renderer>().sharedMaterial = selectedMaterial;
         onSelected?.Invoke();
+        GetComponent<SelectorIndicatorController>()?.SetSelected(true);
     }
 
     public void Deselect()
     {
         GetComponent<Renderer>().sharedMaterial = deselectedMaterial;
         onDeselected?.Invoke();
+        GetComponent<SelectorIndicatorController>()?.SetSelected(false);
     }
 
     /**

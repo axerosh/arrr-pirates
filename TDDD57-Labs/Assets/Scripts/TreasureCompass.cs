@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TreasureCompass : MonoBehaviour
@@ -8,7 +9,6 @@ public class TreasureCompass : MonoBehaviour
 
     private float spinSpeed = 80.0f;
 
-    // Update is called once per frame
     void Update()
     {
         // Find closest treasure
