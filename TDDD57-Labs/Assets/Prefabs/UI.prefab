@@ -678,7 +678,7 @@ MonoBehaviour:
   selectedText: {fileID: 8734882104979210409}
   hintTimer: 7
   hintFlash: {r: 0, g: 0.1750474, b: 1, a: 1}
-  hintFlashDecay: 1.25
+  hintFlashDecay: 0.75
 --- !u!1 &1267981516
 GameObject:
   m_ObjectHideFlags: 0

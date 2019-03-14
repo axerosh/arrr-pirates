@@ -36,6 +36,11 @@ public class GamePlayUI : MonoBehaviour {
 
     private bool reposition = false;
 
+    private void Start()
+    {
+        HideHint();
+    }
+
     private void Update() {
         if (hintText.gameObject.activeSelf) {
             UpdateHintText();
@@ -43,7 +48,7 @@ public class GamePlayUI : MonoBehaviour {
     }
 
     private void UpdateHintText() {
-        hintText.color *= (hintFlashDecay * Time.deltaTime);
+        hintText.color += Time.deltaTime * Color.white / hintFlashDecay;
     }
 
     private void SetNewHint(string text) {
@@ -64,12 +69,14 @@ public class GamePlayUI : MonoBehaviour {
     public void DisplayCrewmanHint() {
         hintText.gameObject.SetActive(true);
         SetNewHint(CREWMAN_HINT);
+        CancelInvoke("HideHint");
         Invoke("HideHint", hintTimer);
     }
 
     public void DisplayHelmsmanHint() {
         hintText.gameObject.SetActive(true);
         SetNewHint(HELMSMAN_HINT);
+        CancelInvoke("HideHint");
         Invoke("HideHint", hintTimer);
     }
 
