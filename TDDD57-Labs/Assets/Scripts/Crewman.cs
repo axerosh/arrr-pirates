@@ -4,9 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Crewman : MonoBehaviour
-{
-    private static bool crewmanHintShown = false;
+public class Crewman : MonoBehaviour {
+    private bool showCrewmanHint = true;
     public TextMeshPro hintText;
     public GameObject carriedTreasure;
 
@@ -95,7 +94,7 @@ public class Crewman : MonoBehaviour
 
     private void Update()
     {
-        if (!crewmanHintShown) {
+        if (showCrewmanHint) {
             UpdateText();
         }
 
@@ -109,9 +108,7 @@ public class Crewman : MonoBehaviour
     }
 
     void UpdateText() {
-        if (!crewmanHintShown) {
-            hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
-        }
+        hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
     }
 
     /*
@@ -336,13 +333,21 @@ public class Crewman : MonoBehaviour
         }
 
         // Underwater target
-        if (target.GetComponentInParent<Treasure>())
-        {
+        if (target.GetComponentInParent<Treasure>()) {
+            //Deselect any previously selected chest.
             if (swimTarget) {
                 swimTarget.GetComponent<Treasure>()?.ToggleSelected(false);
             }
+            //Set chest as new target.
             swimTarget = target.transform;
             swimTarget.GetComponent<Treasure>()?.ToggleSelected(true);
+
+            //The first time a crewman is ordered to get a treasure, permanently disable the crewman hint.
+            if (showCrewmanHint) {
+                foreach (Crewman man in FindObjectsOfType<Crewman>()) {
+                    man.DisableClickMeHint();
+                }
+            }
 
             // Go to ladder
             if (state == State.WALKING)
@@ -412,8 +417,8 @@ public class Crewman : MonoBehaviour
         }
     }
 
-    public void DisableClickMe() {
-        crewmanHintShown = true;
+    public void DisableClickMeHint() {
+        showCrewmanHint = false;
         hintText.gameObject.SetActive(false);
     }
 
@@ -421,10 +426,7 @@ public class Crewman : MonoBehaviour
     /// Called when this crewman is selected.
     /// </summary>
     void OnSelected() {
-        if (!crewmanHintShown) {
-            foreach(Crewman man in FindObjectsOfType<Crewman>()) {
-                man.DisableClickMe();
-            }
+        if (showCrewmanHint) {
             GameObject.FindWithTag("UI").GetComponentInChildren<GamePlayUI>().DisplayCrewmanHint();
         }
     }

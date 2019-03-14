@@ -9,20 +9,45 @@ public class GamePlayUI : MonoBehaviour {
     public Sprite repositionIcon;
     public Sprite cancelIcon;
 
-    public Text hintText;
+    [SerializeField]
+    private Text hintText = null;
 
     public Text scoreText;
 
     public Text selectedText;
 
+    /// <summary>
+    /// How long to display temporary hints.
+    /// </summary>
     public float hintTimer;
     public readonly string REPOSITION_STRING = "Reposition the board by touching somewhere on a detected plane!";
     public readonly string CREWMAN_HINT = "Touch a treasure chest to have your crewman go get it!";
     public readonly string HELMSMAN_HINT = "While the helmsman is selected, the ship will move. Steer by tilting your phone!";
 
+    public Color hintFlash;
+    /// <summary>
+    /// How long until hint messages return to white.
+    /// </summary>
+    public float hintFlashDecay;
+
     private int winCondition;
 
     private bool reposition = false;
+
+    private void Update() {
+        if (hintText.gameObject.activeSelf) {
+            UpdateHintText();
+        }
+    }
+
+    private void UpdateHintText() {
+        hintText.color *= (hintFlashDecay * Time.deltaTime);
+    }
+
+    private void SetNewHint(string text) {
+        hintText.text = text;
+        hintText.color = hintFlash;
+    }
 
     public void SetWinCondition(int newWinCondition) {
         Debug.Log("New win condition: " + newWinCondition);
@@ -35,19 +60,19 @@ public class GamePlayUI : MonoBehaviour {
     }
 
     public void DisplayCrewmanHint() {
-        hintText.text = CREWMAN_HINT;
         hintText.gameObject.SetActive(true);
+        SetNewHint(CREWMAN_HINT);
         Invoke("HideHint", hintTimer);
     }
 
     public void DisplayHelmsmanHint() {
-        hintText.text = HELMSMAN_HINT;
         hintText.gameObject.SetActive(true);
+        SetNewHint(HELMSMAN_HINT);
         Invoke("HideHint", hintTimer);
     }
 
     public void ToggleRepositionButton() {
-        hintText.text = REPOSITION_STRING;
+        SetNewHint(REPOSITION_STRING);
         CancelInvoke("HideHint"); //Make sure the hint isn't hidden by previous character selects.
         reposition = !reposition;
         hintText.gameObject.SetActive(reposition);
@@ -77,5 +102,19 @@ public class GamePlayUI : MonoBehaviour {
 
     private void HideHint() {
         hintText.gameObject.SetActive(false);
+    }
+
+    private void ShowAndroidToastMessage(string message) {
+        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
+        if (unityActivity != null) {
+            AndroidJavaClass toastClass = new AndroidJavaClass("android.widget.Toast");
+            unityActivity.Call("runOnUiThread", new AndroidJavaRunnable(() => {
+                AndroidJavaObject toastObject = toastClass.CallStatic<AndroidJavaObject>("makeText", unityActivity,
+                    message, 0);
+                toastObject.Call("show");
+            }));
+        }
     }
 }

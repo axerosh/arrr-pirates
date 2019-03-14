@@ -51,6 +51,8 @@ public class ArrrController : MonoBehaviour
     public GamePlayUI gamePlayUI;
     private bool repositionBoard = false;
 
+    public GameOverUI gameOverUI;
+
     private Selectable selected = null;
 
     /**
@@ -207,7 +209,7 @@ public class ArrrController : MonoBehaviour
         else
         {
             // Clicked elsewhere, deselect
-            selected.Deselect();
+            selected?.Deselect();
             selected = null;
         }
         gamePlayUI.SetSelected(newSelected);
@@ -324,6 +326,9 @@ public class ArrrController : MonoBehaviour
     public void AddScore(int amount) {
         score += amount;
         gamePlayUI.UpdateScoreText(score);
+        if(score >= winCondition) {
+            gameOverUI.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
