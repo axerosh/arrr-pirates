@@ -36,6 +36,8 @@ When the ship is moving, it its positition is static while everything in the sea
 To still give the feeling of the ship moving, a wake effekt is produced behind it, which turs as the ship turns.
 There are also planks spread out on the water surface and sea floor for this purpose.
 
+Planks stop appearing when the ship has sailed too far away from where treasures can be found, resulting in a empty environment indicating that the ship is "outside" the level.
+
 As **Treasures** are collected, a gold pile on the ship deck increases in size.
 
 There are also feedback in the UI including a label "x/10" where x is the number of collected **Treasures** as well as a label indicating what is currently selected (a **Helmsman**/a **Diver**/nothing).
