@@ -65,3 +65,5 @@ If their initial camera postition after placing the board was under water, which
 The clickable hitbox of the **Helmsman**, **Divers** and **Treasures** scale linearly by the distance to the camera, making it easier to click them without moving the phone.
 
 The replace board feature allows the player to change location for more comfort and varied real-world height of operation, at their own discretion.
+
+Unity technicality: The parent transform of the camera is scaled up by a factor 100 along all axes to make everything appear 100 times smaller when running the app.
