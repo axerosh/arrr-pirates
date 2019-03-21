@@ -39,5 +39,7 @@ Båda dessa effekter tillsammans gör det tydligt för spelaren att en karaktär
 En utökning av denna feedback som kunde vara användbar är att ge spelaren någon form av indikation över vart ens valda besättningsman befinner sig när den inte längre syns på skärmen, t.ex. i form av en pil eller liknande.
 
 #### Svallvågor.
+När styrmannen är vald börjar skeppet röra sig frammåt. Skeppets rörelse visualiseras genom att svallvågor börjar avges från skeppets akter. Denna effekt syns både ovan och under vattnet och låter på så vis spelaren se att skeppet just nu är i rörelse.
 
 #### Brädor i vattnet.
+Svallvågorna i sig visade sig dock inte vara ett tillräckligt tydligt tecken på rörelse. Flera av de människor vi hade att testa spelet verkade inte uppfatta att skeppet började röra sig när styrmannen valdes vilket ledde till förvirring. För att lösa detta implementerade vi en samling plankor som slumpas ut runt om i spelet, både flytandes på havsytan och liggandes på botten. Dessa gör det mycket tydligare när skeppet är i rörelse då spelaren alltid har någon form av referenspunkt att jämföra med.
