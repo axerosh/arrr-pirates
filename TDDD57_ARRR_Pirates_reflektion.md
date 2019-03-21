@@ -31,6 +31,11 @@ Man kan på så sätt med tillit klicka på saker även från någon meter eller
 
 ## Feedback
 
+#### Placering av spelplan
+Vårt spel ska ses nästan som ett brädspel. Man placerar ut sin spelyta i en 3D-miljö och interagerar sedan med ytan i fråga. När appen öppnas kommer spelaren till en skärm som dels visar en informationstext som berättar hur man hittar en bra yta att placera sitt spel på, och dels har en knapp uppe i vänstra hörnet som tar en till en skärm med noggrannare beskrivningar. Denna skärm var tänkt att ha en del hjälpsamma bilder men dessa lades till slut aldrig till då spelare sällan brydde sig om knappen utan istället direkt följde anvisningarna på skärmen.
+
+När ARCore hittat en lämplig yta ritas denna ut på skärmen och en ny hjälptext visas för att förklara hur spelaren kan placera ut spelytan.
+
 #### Undervattenseffekter.
 För att förstärka undervattenskänslan när mobilen rör sig under vattnet implementerade vi en blå ton som läggs på kameran då spelaren befinner sig under vatten. Detta tillför först och främst en starkare inlevelsekänsla då man förväntar sig att ens syn ska fungera annorlunda under vattenytan. Men kan också bidra till att förtydliga att det finns en skillnad mellan att vara ovan vattnet, var man i första hand försöker kontrollera sina besättningsmän, och under vattnet, var man letar efter skattkistor.
 
