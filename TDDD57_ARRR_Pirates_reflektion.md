@@ -34,7 +34,14 @@ Man kan på så sätt med tillit klicka på saker även från någon meter eller
 #### Undervattenseffekter.
 För att förstärka undervattenskänslan när mobilen rör sig under vattnet implementerade vi en blå ton som läggs på kameran då spelaren befinner sig under vatten. Detta tillför först och främst en starkare inlevelsekänsla då man förväntar sig att ens syn ska fungera annorlunda under vattenytan. Men kan också bidra till att förtydliga att det finns en skillnad mellan att vara ovan vattnet, var man i första hand försöker kontrollera sina besättningsmän, och under vattnet, var man letar efter skattkistor.
 
-#### Brackets runt valda karaktärer.
+#### Val av karaktär.
+När en besättningsman väljs sker två saker:
+* En text högst upp på skärmen visar vad för typ av karaktär man har vald för tillfället. Detta låter spelaren veta vad för konsekvenser ens handlingar kommer ha även om man inte ser den karaktär man valt direkt på skärmen. T.ex kommer ett klick på en skattkista skicka en vald dykare för att hämta den, men kommer inte ha någon som helst effekt om man har styrmannen vald.
+* En klammer (dvs. tecknen "[ ]") dyker upp runt karaktären. Detta låter en spelare se konkret vilken karaktär de har valda för stunden.
+
+Båda dessa effekter tillsammans gör det tydligt för spelaren att en karaktär blivit vald när man rört vid den.
+
+En utökning av denna feedback som kunde vara användbar är att ge spelaren någon form av indikation över vart ens valda besättningsman befinner sig när den inte längre syns på skärmen, t.ex. i form av en pil eller liknande.
 
 #### Svallvågor.
 
