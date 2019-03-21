@@ -14,7 +14,7 @@ Navigation genom att fysiskt flytta och rotera sin telefon fungerade över lag b
 Som användare var det roligt att cinematiskt panorera kameran längs båten efter behag och man fick också möjlighet att styra båten från valfritt perspekiv.
 Kamerans virtuella position var dock alltid lite skakig vilket märktes tydligt när man flyttade den mycket nära saker.
 Att man kunde flytta kameran fritt nära saker gjorde även att man kunde klippa igenom modeller efter behag.
-Denna typ av upplevse-brytande handlingar var dock ett problem för ett detta goofy litet AR-spel som detta.
+Denna typ av upplevse-brytande handlingar var dock inte ett problem för ett goofy litet AR-spel som detta.
 
 #### Skalbar klick-hitbox
 Vi hade AR-ovana testanvändare som inte tänkte på att man fysiskt kunde röra kameran närmare för att zooma utan försökte istället fibrilt klicka på besättningsmän på avstånd med flera missar och någon enstaka träff.
@@ -22,9 +22,14 @@ Det tycktes dels vara frustrerande och gjorde även att tutorial-prompts lätt m
 För att motverka detta fibrila klickande har vi låtit klick-hitboxen för saker skala linjärt med avståndet till kameran (med en undre och en övre gräns).
 Man kan på så sätt med tillit klicka på saker även från någon meter eller två bort utan att ristera att missa men åndå ha kvar precisionen då kameran är nära placerad.
 
-#### Klicka Styrman
-
-#### Motion controlls
+#### Styrman och motion controls
+Om man klickar på styrman får man tillgång till att styra båten genom motion controls genom att rotera telefonen i samma plan i vilket den ligger (som en ratt).
+Att denna interaktion liknar något för många så bekant som en ratt gör den lätt att förstå och det känns mycket responsivt och (förvånandsvärt) bekvämt att styra så.
+Vi stötte dock här på problem med att skärmen i Android vändes när vi vände telefonen vilket gjorde styrning mycket obekvämt.
+Det hanterade vi genom att bara tillåta de två liggande orienteringarna.
+Att ändå ha två, snarare än en, orienteringar låter användaren hålla telefonen åt det håll (höger/vänster) som personligen känns bäst eller som passar situationen bäst om telefonen exempelvis än sladdansluten till höger eller vänster.
+(Man laddar nog sällan mobilen medan man vill kunna flytta den i AR men vid utveckling var detta mycket smidigt)
+Det gör dock att telefonen inte kan roteras upp till 180 grader utan att skärmen vänds, men man svänger bra nog ändå och lär sig också fort att inte rotera så mycket.
 
 #### Klicka Diver
 
