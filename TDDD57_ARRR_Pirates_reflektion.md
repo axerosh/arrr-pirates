@@ -20,7 +20,7 @@ Denna typ av upplevse-brytande handlingar var dock ett problem för ett detta go
 Vi hade AR-ovana testanvändare som inte tänkte på att man fysiskt kunde röra kameran närmare för att zooma utan försökte istället fibrilt klicka på besättningsmän på avstånd med flera missar och någon enstaka träff.
 Det tycktes dels vara frustrerande och gjorde även att tutorial-prompts lätt missades.
 För att motverka detta fibrila klickande har vi låtit klick-hitboxen för saker skala linjärt med avståndet till kameran (med en undre och en övre gräns).
-Man kan på så sätt med tillit klicka på saker även från någon meter eller två bort utan att ristera att missa men åndå ha kvar precisionen då kameran är nära plcerad.
+Man kan på så sätt med tillit klicka på saker även från någon meter eller två bort utan att ristera att missa men åndå ha kvar precisionen då kameran är nära placerad.
 
 #### Klicka Styrman
 
