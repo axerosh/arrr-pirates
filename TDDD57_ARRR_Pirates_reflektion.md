@@ -20,7 +20,7 @@ Denna typ av upplevse-brytande handlingar var dock inte ett problem för ett goo
 Vi hade AR-ovana testanvändare som inte tänkte på att man fysiskt kunde röra kameran närmare för att zooma utan försökte istället fibrilt klicka på besättningsmän på avstånd med flera missar och någon enstaka träff.
 Det tycktes dels vara frustrerande och gjorde även att tutorial-prompts lätt missades.
 För att motverka detta fibrila klickande har vi låtit klick-hitboxen för saker skala linjärt med avståndet till kameran (med en undre och en övre gräns).
-Man kan på så sätt med tillit klicka på saker även från någon meter eller två bort utan att ristera att missa men åndå ha kvar precisionen då kameran är nära placerad.
+Man kan på så sätt med tillit klicka på saker även från någon meter eller två bort utan att ristera att missa men åndå ha kvar precisionen då kameran är nära plcerad.
 
 #### Styrman och motion controls
 Om man klickar på styrman får man tillgång till att styra båten genom motion controls genom att rotera telefonen i samma plan i vilket den ligger (som en ratt).
@@ -37,6 +37,13 @@ Det gör dock att telefonen inte kan roteras upp till 180 grader utan att skärm
 
 
 ## Feedback
+#### Placering av spelplan
+Vårt spel ska ses nästan som ett brädspel. Man placerar ut sin spelyta i en 3D-miljö och interagerar sedan med ytan i fråga. När appen öppnas kommer spelaren till en skärm som dels visar en informationstext som berättar hur man hittar en bra yta att placera sitt spel på, och dels har en knapp uppe i vänstra hörnet som tar en till en skärm med noggrannare beskrivningar. Denna skärm var tänkt att ha en del hjälpsamma bilder men dessa lades till slut aldrig till då spelare sällan brydde sig om knappen utan istället direkt följde anvisningarna på skärmen.
+
+När ARCore hittat en lämplig yta ritas denna ut på skärmen och en ny hjälptext visas för att förklara hur spelaren kan placera ut spelytan. Denna nya hjälptext tar den förras plats och är av samma färg och nästan lika lång vilket gör det svårt att se att det är en ny text. Detta feedback-bekymmer löstes för liknande texter gällande vad olika besättningsmän används till och samma lösning borde antagligen användas här.
+
+#### Tutorial
+För att lära en ny spelare hur spelet spelas använder vi oss dels av text som svävar ovanför besättningsmän (med texten "CLICK ME") och hjälpmedelanden i gränssnittet som förklarar vad en besättningsman kan användas till när den väl är vald. Hjälptexten flash:ar i blått när den byter för att göra det tydligare att en ändring skett.
 
 #### Undervattenseffekter
 För att förstärka undervattenskänslan när mobilen rör sig under vattnet implementerade vi en blå ton som läggs på kameran då spelaren befinner sig under vatten. Detta tillför först och främst en starkare inlevelsekänsla då man förväntar sig att ens syn ska fungera annorlunda under vattenytan. Men kan också bidra till att förtydliga att det finns en skillnad mellan att vara ovan vattnet, var man i första hand försöker kontrollera sina besättningsmän, och under vattnet, var man letar efter skattkistor.
