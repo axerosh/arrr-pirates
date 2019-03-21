@@ -15,8 +15,6 @@ Kamerans virtuella position var dock alltid lite skakig vilket märktes tydligt 
 Att man kunde flytta kameran fritt nära saker gjorde även att man kunde klippa igenom modeller efter behag.
 Denna typ av upplevse-brytande handlingar var dock ett problem för ett detta goofy litet AR-spel som detta.
 
-#### Flytta kameran/telefonen (3D).
-
 #### Klicka Styrman.
 
 #### Motion controlls.
