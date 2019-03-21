@@ -37,7 +37,8 @@ Vårt spel ska ses nästan som ett brädspel. Man placerar ut sin spelyta i en 3
 
 När ARCore hittat en lämplig yta ritas denna ut på skärmen och en ny hjälptext visas för att förklara hur spelaren kan placera ut spelytan. Denna nya hjälptext tar den förras plats och är av samma färg och nästan lika lång vilket gör det svårt att se att det är en ny text. Detta feedback-bekymmer löstes för liknande texter gällande vad olika besättningsmän används till och samma lösning borde antagligen användas här.
 
-#### 
+#### Tutorial
+För att lära en ny spelare hur spelet spelas använder vi oss dels av text som svävar ovanför besättningsmän (med texten "CLICK ME") och hjälpmedelanden i gränssnittet som förklarar vad en besättningsman kan användas till när den väl är vald. Hjälptexten flash:ar i blått när den byter för att göra det tydligare att en ändring skett.
 
 #### Undervattenseffekter
 För att förstärka undervattenskänslan när mobilen rör sig under vattnet implementerade vi en blå ton som läggs på kameran då spelaren befinner sig under vatten. Detta tillför först och främst en starkare inlevelsekänsla då man förväntar sig att ens syn ska fungera annorlunda under vattenytan. Men kan också bidra till att förtydliga att det finns en skillnad mellan att vara ovan vattnet, var man i första hand försöker kontrollera sina besättningsmän, och under vattnet, var man letar efter skattkistor.
