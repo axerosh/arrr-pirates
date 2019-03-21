@@ -31,10 +31,13 @@ Att ändå ha två, snarare än en, orienteringar låter användaren hålla tele
 (Man laddar nog sällan mobilen medan man vill kunna flytta den i AR men vid utveckling var detta mycket smidigt)
 Det gör dock att telefonen inte kan roteras upp till 180 grader utan att skärmen vänds, men man svänger bra nog ändå och lär sig också fort att inte rotera så mycket.
 
-#### Klicka Diver
+#### Dykare och skattjakt
+Det var intressant att behöva flytta kameran mellan över och under vattenytan för att klicka på dykare och skatter om vart annat vilket bilade en liten gameplay-loop.
 
-#### Klicka skatt
-
+#### Kompass och seglande
+När man låtit sina dykare fiskat upp alla synliga skatter måste man flytta båten för att se fler (se styrman ovan).
+För det har man en kompass till hjälp som pekar mot den närmaste skatten.
+Detta utökar gameplay-loopen ytterligare, genom att låta spelaren byta från att låta dykare dyka till att titta på kompassen och segla och sedan tillbaka till dykande igen.
 
 ## Feedback
 #### Placering av spelplan
