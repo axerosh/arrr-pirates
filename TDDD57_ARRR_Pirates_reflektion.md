@@ -22,21 +22,21 @@ Det tycktes dels vara frustrerande och gjorde även att tutorial-prompts lätt m
 För att motverka detta fibrila klickande har vi låtit klick-hitboxen för saker skala linjärt med avståndet till kameran (med en undre och en övre gräns).
 Man kan på så sätt med tillit klicka på saker även från någon meter eller två bort utan att ristera att missa men åndå ha kvar precisionen då kameran är nära plcerad.
 
-#### Klicka Styrman.
+#### Klicka Styrman
 
-#### Motion controlls.
+#### Motion controlls
 
-#### Klicka Diver.
+#### Klicka Diver
 
-#### Klicka skatt.
+#### Klicka skatt
 
 
 ## Feedback
 
-#### Undervattenseffekter.
+#### Undervattenseffekter
 För att förstärka undervattenskänslan när mobilen rör sig under vattnet implementerade vi en blå ton som läggs på kameran då spelaren befinner sig under vatten. Detta tillför först och främst en starkare inlevelsekänsla då man förväntar sig att ens syn ska fungera annorlunda under vattenytan. Men kan också bidra till att förtydliga att det finns en skillnad mellan att vara ovan vattnet, var man i första hand försöker kontrollera sina besättningsmän, och under vattnet, var man letar efter skattkistor.
 
-#### Val av karaktär.
+#### Val av karaktär
 När en besättningsman väljs sker två saker:
 * En text högst upp på skärmen visar vad för typ av karaktär man har vald för tillfället. Detta låter spelaren veta vad för konsekvenser ens handlingar kommer ha även om man inte ser den karaktär man valt direkt på skärmen. T.ex kommer ett klick på en skattkista skicka en vald dykare för att hämta den, men kommer inte ha någon som helst effekt om man har styrmannen vald.
 * En klammer (dvs. tecknen "[ ]") dyker upp runt karaktären. Detta låter en spelare se konkret vilken karaktär de har valda för stunden.
@@ -45,8 +45,8 @@ Båda dessa effekter tillsammans gör det tydligt för spelaren att en karaktär
 
 En utökning av denna feedback som kunde vara användbar är att ge spelaren någon form av indikation över vart ens valda besättningsman befinner sig när den inte längre syns på skärmen, t.ex. i form av en pil eller liknande.
 
-#### Svallvågor.
+#### Svallvågor
 När styrmannen är vald börjar skeppet röra sig frammåt. Skeppets rörelse visualiseras genom att svallvågor börjar avges från skeppets akter. Denna effekt syns både ovan och under vattnet och låter på så vis spelaren se att skeppet just nu är i rörelse.
 
-#### Brädor i vattnet.
+#### Brädor i vattnet
 Svallvågorna i sig visade sig dock inte vara ett tillräckligt tydligt tecken på rörelse. Flera av de människor vi hade att testa spelet verkade inte uppfatta att skeppet började röra sig när styrmannen valdes vilket ledde till förvirring. För att lösa detta implementerade vi en samling plankor som slumpas ut runt om i spelet, både flytandes på havsytan och liggandes på botten. Dessa gör det mycket tydligare när skeppet är i rörelse då spelaren alltid har någon form av referenspunkt att jämföra med.
