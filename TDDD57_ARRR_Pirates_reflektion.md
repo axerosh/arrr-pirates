@@ -9,12 +9,14 @@ Därifrån kom idén att låta spelet handla om ett skepp med en besättning som
 
 ## Interaktion
 
+#### Kamerastyrning
 Navigation genom att fysiskt flytta och rotera sin telefon fungerade över lag bra.
 Som användare var det roligt att cinematiskt panorera kameran längs båten efter behag och man fick också möjlighet att styra båten från valfritt perspekiv.
 Kamerans virtuella position var dock alltid lite skakig vilket märktes tydligt när man flyttade den mycket nära saker.
 Att man kunde flytta kameran fritt nära saker gjorde även att man kunde klippa igenom modeller efter behag.
 Denna typ av upplevse-brytande handlingar var dock ett problem för ett detta goofy litet AR-spel som detta.
 
+#### Skalbar klick-hitbox
 Vi hade AR-ovana testanvändare som inte tänkte på att man fysiskt kunde röra kameran närmare för att zooma utan försökte istället fibrilt klicka på besättningsmän på avstånd med flera missar och någon enstaka träff.
 Det tycktes dels vara frustrerande och gjorde även att tutorial-prompts lätt missades.
 För att motverka detta fibrila klickande har vi låtit klick-hitboxen för saker skala linjärt med avståndet till kameran (med en undre och en övre gräns).
