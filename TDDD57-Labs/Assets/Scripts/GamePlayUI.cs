@@ -21,7 +21,7 @@ public class GamePlayUI : MonoBehaviour {
     /// </summary>
     public float hintTimer;
     public readonly string REPOSITION_STRING = "Reposition the board by touching somewhere on a detected plane!";
-    public readonly string CREWMAN_HINT = "Touch a treasure chest to have your diver collect it!";
+    public readonly string CREWMAN_HINT = "Touch a treasure chest on the seafloor to have your diver collect it!";
     public readonly string HELMSMAN_HINT = "While the helmsman is selected, the ship will move. Steer by tilting your phone!";
 
     public Color hintFlash;

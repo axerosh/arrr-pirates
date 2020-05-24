@@ -17,16 +17,6 @@ public class Helmsman : MonoBehaviour
         selectable.onDeselected = Deselect;
     }
 
-    private void Update() {
-        UpdateText();
-    }
-
-    void UpdateText() {
-        if (!helmsmanHintRead) {
-            hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
-        }
-    }
-
     private void Select()
     {
         if (!helmsmanHintRead) {

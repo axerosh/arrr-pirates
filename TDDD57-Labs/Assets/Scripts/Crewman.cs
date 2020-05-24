@@ -91,17 +91,6 @@ public class Crewman : MonoBehaviour {
         return GameObject.FindWithTag("Ship").transform.InverseTransformPoint(point);
     }
 
-    private void Update()
-    {
-        if (showCrewmanHint) {
-            UpdateText();
-        }
-    }
-
-    void UpdateText() {
-        hintText.transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
-    }
-
     /*
      * Change state. This is done here outside FixedUpdate to avoid heavy load.
      */
@@ -334,13 +323,6 @@ public class Crewman : MonoBehaviour {
             swimTarget = target.transform;
             swimTarget.GetComponent<SelectorIndicatorController>()?.SetSelected(true);
 
-            //The first time a crewman is ordered to get a treasure, permanently disable the crewman hint.
-            if (showCrewmanHint) {
-                foreach (Crewman man in FindObjectsOfType<Crewman>()) {
-                    man.DisableClickMeHint();
-                }
-            }
-
             // Go to ladder
             if (state == State.WALKING)
             {
@@ -425,8 +407,10 @@ public class Crewman : MonoBehaviour {
     /// Called when this crewman is selected.
     /// </summary>
     void OnSelected() {
+        // The first time a crewman is selected
         if (showCrewmanHint) {
             GameObject.FindWithTag("UI").GetComponentInChildren<GamePlayUI>().DisplayCrewmanHint();
+            DisableClickMeHint();
         }
     }
 

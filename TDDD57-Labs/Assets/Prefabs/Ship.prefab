@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5890310767206297707}
   - component: {fileID: 188514332741884040}
   - component: {fileID: 279779876791066268}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DiversLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,13 +28,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105007683620152695}
-  m_LocalRotation: {x: -0, y: -0.70573556, z: -0, w: 0.7084754}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 2.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907308364996056300}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: -89.77801, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 7.94}
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2100000, guid: 72afef8486dac304485ad8ac85b7d038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4210,7 +4210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6579425580052358068}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07348812, y: 3.5198617, z: 12.396267}
+  m_LocalPosition: {x: -0.07348812, y: 3.6, z: 12.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907308365418518778}
@@ -4981,7 +4981,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6579557467464704934}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.015009909, y: 3.5581448, z: 6.2491927}
+  m_LocalPosition: {x: 0.015009909, y: 3.64, z: 6.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 907308365418518778}
@@ -6000,7 +6000,7 @@ GameObject:
   - component: {fileID: 1842855626062260776}
   - component: {fileID: 1741424207425432561}
   - component: {fileID: 1644704520736835284}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: CompassLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6014,7 +6014,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7948613123876155213}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 15.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -6023,7 +6023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 8.12}
+  m_AnchoredPosition: {x: 0, y: 8.12}
   m_SizeDelta: {x: 9.004, y: 1.736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3753257887890906849
@@ -6043,7 +6043,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2100000, guid: 72afef8486dac304485ad8ac85b7d038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6134,7 +6134,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -6311,7 +6311,7 @@ GameObject:
   - component: {fileID: 4231490703332155359}
   - component: {fileID: 1320549245571587473}
   - component: {fileID: 514393749207107398}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HelmsmanLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6354,7 +6354,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2100000, guid: 72afef8486dac304485ad8ac85b7d038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6445,7 +6445,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -6744,6 +6744,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2596095285011317442, guid: a4865e7b7963eff46b4cae949b05d695,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.725
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4865e7b7963eff46b4cae949b05d695, type: 3}
 --- !u!4 &2899291989757786528 stripped
@@ -6759,6 +6764,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907308364996056300}
     m_Modifications:
+    - target: {fileID: 4437586205865724225, guid: d61974bcaa0462e42b5afc5d84ef6197,
+        type: 3}
+      propertyPath: m_Name
+      value: Crewman
+      objectReference: {fileID: 0}
     - target: {fileID: 4437586205865724226, guid: d61974bcaa0462e42b5afc5d84ef6197,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6814,11 +6824,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4437586205865724225, guid: d61974bcaa0462e42b5afc5d84ef6197,
-        type: 3}
-      propertyPath: m_Name
-      value: Crewman
-      objectReference: {fileID: 0}
     - target: {fileID: 4437586205865724228, guid: d61974bcaa0462e42b5afc5d84ef6197,
         type: 3}
       propertyPath: targets.Array.data[0]
@@ -6849,6 +6854,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907308364996056300}
     m_Modifications:
+    - target: {fileID: 4437586205865724225, guid: d61974bcaa0462e42b5afc5d84ef6197,
+        type: 3}
+      propertyPath: m_Name
+      value: Crewman (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437586205865724225, guid: d61974bcaa0462e42b5afc5d84ef6197,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4437586205865724226, guid: d61974bcaa0462e42b5afc5d84ef6197,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6903,16 +6918,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437586205865724225, guid: d61974bcaa0462e42b5afc5d84ef6197,
-        type: 3}
-      propertyPath: m_Name
-      value: Crewman (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437586205865724225, guid: d61974bcaa0462e42b5afc5d84ef6197,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4437586205865724228, guid: d61974bcaa0462e42b5afc5d84ef6197,
         type: 3}
